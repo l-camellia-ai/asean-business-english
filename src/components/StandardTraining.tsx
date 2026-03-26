@@ -357,13 +357,13 @@ export default function StandardTraining({
   };
 
   return (
-    <div className="flex h-full max-h-[85vh] flex-col">
+    <div className="flex h-full flex-col overflow-hidden">
       {/* 课程头部 */}
-      <CardHeader className="flex-shrink-0 border-b border-border">
+      <div className="flex-shrink-0 border-b border-border px-6 py-4">
         <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
           <div className="flex-1 space-y-2">
-            <CardTitle className="text-lg md:text-xl">{courseTitle}</CardTitle>
-            <CardDescription className="text-sm">{courseDescription}</CardDescription>
+            <h3 className="break-words text-lg font-semibold md:text-xl">{courseTitle}</h3>
+            <p className="break-words text-sm text-muted-foreground">{courseDescription}</p>
             <Badge variant="outline">{courseLevel}</Badge>
           </div>
           <div className="text-left md:text-right">
@@ -372,12 +372,12 @@ export default function StandardTraining({
           </div>
         </div>
         <Progress value={progress} className="mt-4" />
-      </CardHeader>
+      </div>
 
       {/* 内容区域 */}
-      <CardContent className="flex-1 overflow-hidden p-0">
+      <div className="flex-1 overflow-hidden">
         <Tabs value={selectedTab} onValueChange={setSelectedTab} className="flex h-full flex-col">
-          <TabsList className="w-full flex-shrink-0 justify-start overflow-x-auto rounded-none border-b px-4">
+          <TabsList className="w-full flex-shrink-0 justify-start overflow-x-auto rounded-none border-b px-6">
             <TabsTrigger value="overview" className="flex-shrink-0">
               <BookOpen className="mr-2 h-4 w-4" />
               课程概览
@@ -393,7 +393,7 @@ export default function StandardTraining({
           </TabsList>
 
           {/* 课程概览 */}
-          <TabsContent value="overview" className="m-0 flex-1 overflow-hidden p-4">
+          <TabsContent value="overview" className="m-0 flex-1 overflow-hidden px-6 py-4">
             <ScrollArea className="h-full pr-4">
               <div className="space-y-4">
                 <Card>
@@ -401,7 +401,7 @@ export default function StandardTraining({
                     <CardTitle>课程介绍</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-sm text-muted-foreground">{courseDescription}</p>
+                    <p className="break-words text-sm text-muted-foreground">{courseDescription}</p>
                     <div className="grid gap-4 sm:grid-cols-3">
                       <div className="space-y-1">
                         <div className="text-sm font-medium">课程级别</div>
@@ -459,7 +459,7 @@ export default function StandardTraining({
           </TabsContent>
 
           {/* 课程内容 */}
-          <TabsContent value="lessons" className="m-0 flex flex-1 flex-col overflow-hidden p-4">
+          <TabsContent value="lessons" className="m-0 flex flex-1 flex-col overflow-hidden px-6 py-4">
             <div className="flex h-full flex-col space-y-4">
               {/* 课程选择器 */}
               <div className="flex flex-shrink-0 items-center space-x-2 overflow-x-auto pb-2">
@@ -556,7 +556,7 @@ export default function StandardTraining({
           </TabsContent>
 
           {/* 课程测试 */}
-          <TabsContent value="quiz" className="m-0 flex-1 overflow-hidden p-4">
+          <TabsContent value="quiz" className="m-0 flex-1 overflow-hidden px-6 py-4">
             <ScrollArea className="h-full pr-4">
               <div className="space-y-6 pb-4">
                 {!quizSubmitted ? (
@@ -704,7 +704,7 @@ export default function StandardTraining({
             </ScrollArea>
           </TabsContent>
         </Tabs>
-      </CardContent>
+      </div>
     </div>
   );
 }

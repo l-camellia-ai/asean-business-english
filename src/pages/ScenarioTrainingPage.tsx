@@ -356,21 +356,23 @@ export default function ScenarioTrainingPage() {
 
       {/* 标准化训练对话框 */}
       <Dialog open={standardDialogOpen} onOpenChange={setStandardDialogOpen}>
-        <DialogContent className="max-w-4xl">
-          <DialogHeader>
-            <DialogTitle>标准化课程学习</DialogTitle>
-            <DialogDescription>
-              系统化学习商务英语标准表达，完成课程测试获取证书
-            </DialogDescription>
-          </DialogHeader>
-          {selectedScenario && (
-            <StandardTraining
-              courseId={selectedScenario.id.toString()}
-              courseTitle={selectedScenario.title}
-              courseDescription={selectedScenario.description}
-              courseLevel={selectedScenario.difficulty}
-            />
-          )}
+        <DialogContent className="max-w-[95vw] md:max-w-4xl max-h-[90vh] overflow-hidden p-0">
+          <div className="flex h-full max-h-[85vh] flex-col overflow-hidden">
+            <DialogHeader className="flex-shrink-0 border-b px-6 py-4">
+              <DialogTitle>标准化课程学习</DialogTitle>
+              <DialogDescription>系统化学习商务英语标准表达，完成课程测试获取证书</DialogDescription>
+            </DialogHeader>
+            <div className="flex-1 overflow-hidden">
+              {selectedScenario && (
+                <StandardTraining
+                  courseId={selectedScenario.id.toString()}
+                  courseTitle={selectedScenario.title}
+                  courseDescription={selectedScenario.description}
+                  courseLevel={selectedScenario.difficulty}
+                />
+              )}
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     </div>
