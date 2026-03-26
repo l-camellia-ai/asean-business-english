@@ -268,133 +268,128 @@ export default function StandardTraining({
 
   return (
     <div className="flex h-full flex-col bg-background">
-      {/* 课程头部信息卡片 */}
-      <div className="flex-shrink-0 p-6">
-        <Card className="border-2">
-          <CardContent className="p-6">
-            {/* 标题和描述 */}
-            <div className="mb-4 space-y-2">
-              <h2 className="text-2xl font-bold">{courseTitle}</h2>
-              <p className="text-sm text-muted-foreground">{courseDescription}</p>
-              <Badge variant="secondary" className="text-sm">
-                {courseLevel}
-              </Badge>
-            </div>
-
-            {/* 学习进度 */}
-            <div className="mb-4 space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="font-medium">学习进度</span>
-                <span className="font-bold text-primary">{Math.round(progress)}%</span>
+      {/* 课程头部信息卡片 - 可滚动 */}
+      <ScrollArea className="flex-1">
+        <div className="space-y-4 p-6">
+          {/* 课程信息卡片 */}
+          <Card className="border-2">
+            <CardContent className="p-4">
+              {/* 标题和描述 */}
+              <div className="mb-3 space-y-1">
+                <h2 className="text-xl font-bold">{courseTitle}</h2>
+                <p className="text-xs text-muted-foreground">{courseDescription}</p>
+                <Badge variant="secondary" className="text-xs">
+                  {courseLevel}
+                </Badge>
               </div>
-              <Progress value={progress} className="h-2" />
-            </div>
 
-            {/* 课程统计 */}
-            <div className="grid grid-cols-3 gap-4 border-t pt-4">
-              <div className="text-center">
-                <div className="mb-1 flex items-center justify-center gap-1 text-sm text-muted-foreground">
-                  <BookOpen className="h-4 w-4" />
-                  <span>课时</span>
+              {/* 学习进度 */}
+              <div className="mb-3 space-y-1">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-medium">学习进度</span>
+                  <span className="font-bold text-primary">{Math.round(progress)}%</span>
                 </div>
-                <div className="text-lg font-bold text-primary">{lessons.length}课</div>
+                <Progress value={progress} className="h-1.5" />
               </div>
-              <div className="text-center">
-                <div className="mb-1 flex items-center justify-center gap-1 text-sm text-muted-foreground">
-                  <Clock className="h-4 w-4" />
-                  <span>时长</span>
+
+              {/* 课程统计 */}
+              <div className="grid grid-cols-3 gap-3 border-t pt-3">
+                <div className="text-center">
+                  <div className="mb-1 flex items-center justify-center gap-1 text-xs text-muted-foreground">
+                    <BookOpen className="h-3 w-3" />
+                    <span>课时</span>
+                  </div>
+                  <div className="text-base font-bold text-primary">{lessons.length}课</div>
                 </div>
-                <div className="text-lg font-bold text-primary">2小时</div>
-              </div>
-              <div className="text-center">
-                <div className="mb-1 flex items-center justify-center gap-1 text-sm text-muted-foreground">
-                  <FileText className="h-4 w-4" />
-                  <span>测试</span>
+                <div className="text-center">
+                  <div className="mb-1 flex items-center justify-center gap-1 text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3" />
+                    <span>时长</span>
+                  </div>
+                  <div className="text-base font-bold text-primary">2小时</div>
                 </div>
-                <div className="text-lg font-bold text-primary">{quizzes.length}题</div>
+                <div className="text-center">
+                  <div className="mb-1 flex items-center justify-center gap-1 text-xs text-muted-foreground">
+                    <FileText className="h-3 w-3" />
+                    <span>测试</span>
+                  </div>
+                  <div className="text-base font-bold text-primary">{quizzes.length}题</div>
+                </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            </CardContent>
+          </Card>
 
-      {/* Tab导航和内容 */}
-      <div className="flex-1 overflow-hidden">
-        <Tabs value={selectedTab} onValueChange={setSelectedTab} className="flex h-full flex-col">
-          {/* Tab列表 */}
-          <TabsList className="mx-6 mb-4 w-auto justify-start">
-            <TabsTrigger value="overview">
-              <BookOpen className="mr-2 h-4 w-4" />
-              课程概览
-            </TabsTrigger>
-            <TabsTrigger value="lessons">
-              <Play className="mr-2 h-4 w-4" />
-              课程内容
-            </TabsTrigger>
-            <TabsTrigger value="quiz">
-              <FileText className="mr-2 h-4 w-4" />
-              课程测试
-            </TabsTrigger>
-          </TabsList>
+          {/* Tab导航和内容 */}
+          <Tabs value={selectedTab} onValueChange={setSelectedTab} className="space-y-4">
+            {/* Tab列表 */}
+            <TabsList className="w-full justify-start">
+              <TabsTrigger value="overview" className="text-xs">
+                <BookOpen className="mr-1.5 h-3 w-3" />
+                课程概览
+              </TabsTrigger>
+              <TabsTrigger value="lessons" className="text-xs">
+                <Play className="mr-1.5 h-3 w-3" />
+                课程内容
+              </TabsTrigger>
+              <TabsTrigger value="quiz" className="text-xs">
+                <FileText className="mr-1.5 h-3 w-3" />
+                课程测试
+              </TabsTrigger>
+            </TabsList>
 
-          {/* 课程概览 */}
-          <TabsContent value="overview" className="m-0 flex-1 overflow-hidden px-6">
-            <ScrollArea className="h-full">
-              <div className="space-y-4 pb-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>课程介绍</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm leading-relaxed text-muted-foreground">{courseDescription}</p>
-                  </CardContent>
-                </Card>
+            {/* 课程概览 */}
+            <TabsContent value="overview" className="m-0 space-y-4">
+              <Card>
+                <CardHeader className="p-4">
+                  <CardTitle className="text-base">课程介绍</CardTitle>
+                </CardHeader>
+                <CardContent className="p-4 pt-0">
+                  <p className="text-xs leading-relaxed text-muted-foreground">{courseDescription}</p>
+                </CardContent>
+              </Card>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>课程列表</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      {lessons.map((lesson, index) => (
-                        <div
-                          key={lesson.id}
-                          className={cn(
-                            'flex items-start gap-3 rounded-lg border p-4 transition-colors',
-                            !lesson.locked && 'hover:border-primary hover:bg-accent/50',
-                            lesson.locked && 'opacity-60'
+              <Card>
+                <CardHeader className="p-4">
+                  <CardTitle className="text-base">课程列表</CardTitle>
+                </CardHeader>
+                <CardContent className="p-4 pt-0">
+                  <div className="space-y-2">
+                    {lessons.map((lesson, index) => (
+                      <div
+                        key={lesson.id}
+                        className={cn(
+                          'flex items-start gap-2 rounded-lg border p-3 transition-colors',
+                          !lesson.locked && 'hover:border-primary hover:bg-accent/50',
+                          lesson.locked && 'opacity-60'
+                        )}
+                      >
+                        <div className="flex-shrink-0 pt-0.5">
+                          {lesson.completed ? (
+                            <CheckCircle2 className="h-4 w-4 text-green-500" />
+                          ) : lesson.locked ? (
+                            <Lock className="h-4 w-4 text-muted-foreground" />
+                          ) : (
+                            <div className="flex h-4 w-4 items-center justify-center rounded-full border-2 border-primary text-[10px] font-bold text-primary">
+                              {index + 1}
+                            </div>
                           )}
-                        >
-                          <div className="flex-shrink-0 pt-0.5">
-                            {lesson.completed ? (
-                              <CheckCircle2 className="h-5 w-5 text-green-500" />
-                            ) : lesson.locked ? (
-                              <Lock className="h-5 w-5 text-muted-foreground" />
-                            ) : (
-                              <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-primary text-xs font-bold text-primary">
-                                {index + 1}
-                              </div>
-                            )}
-                          </div>
-                          <div className="flex-1 space-y-1">
-                            <div className="font-medium">{lesson.title}</div>
-                            <div className="text-sm text-muted-foreground">{lesson.description}</div>
-                          </div>
-                          <div className="flex-shrink-0 text-sm text-muted-foreground">{lesson.duration}</div>
                         </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </ScrollArea>
-          </TabsContent>
+                        <div className="flex-1 space-y-0.5">
+                          <div className="text-sm font-medium">{lesson.title}</div>
+                          <div className="text-xs text-muted-foreground">{lesson.description}</div>
+                        </div>
+                        <div className="flex-shrink-0 text-xs text-muted-foreground">{lesson.duration}</div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-          {/* 课程内容 */}
-          <TabsContent value="lessons" className="m-0 flex flex-1 flex-col overflow-hidden px-6">
-            <div className="flex h-full flex-col space-y-4">
+            {/* 课程内容 */}
+            <TabsContent value="lessons" className="m-0 space-y-4">
               {/* 课程选择器 */}
-              <div className="flex flex-shrink-0 gap-2 overflow-x-auto pb-2">
+              <div className="flex gap-2 overflow-x-auto pb-2">
                 {lessons.map((lesson, index) => (
                   <Button
                     key={lesson.id}
@@ -402,260 +397,266 @@ export default function StandardTraining({
                     size="sm"
                     onClick={() => setCurrentLesson(index)}
                     disabled={lesson.locked}
-                    className="shrink-0"
+                    className="shrink-0 text-xs"
                   >
-                    {lesson.locked && <Lock className="mr-2 h-3 w-3" />}
+                    {lesson.locked && <Lock className="mr-1.5 h-3 w-3" />}
                     第{index + 1}课
                   </Button>
                 ))}
               </div>
 
               {/* 课程内容区域 */}
-              <ScrollArea className="flex-1">
-                <div className="space-y-6 pb-6">
-                  {/* 课程标题 */}
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-bold">{lessons[currentLesson].title}</h3>
-                    <p className="text-sm text-muted-foreground">{lessons[currentLesson].description}</p>
-                  </div>
+              <div className="space-y-4">
+                {/* 课程标题 */}
+                <div className="space-y-1">
+                  <h3 className="text-base font-bold">{lessons[currentLesson].title}</h3>
+                  <p className="text-xs text-muted-foreground">{lessons[currentLesson].description}</p>
+                </div>
 
-                  {lessonContent[lessons[currentLesson].id] ? (
-                    <>
-                      {/* 课程配图 */}
-                      <Card className="overflow-hidden">
-                        <img
-                          src={lessonContent[lessons[currentLesson].id].image}
-                          alt={lessons[currentLesson].title}
-                          className="h-64 w-full object-cover"
-                        />
-                      </Card>
+                {lessonContent[lessons[currentLesson].id] ? (
+                  <>
+                    {/* 课程配图 */}
+                    <Card className="overflow-hidden">
+                      <img
+                        src={lessonContent[lessons[currentLesson].id].image}
+                        alt={lessons[currentLesson].title}
+                        className="h-48 w-full object-cover"
+                      />
+                    </Card>
 
-                      {/* 课程正文 */}
-                      <Card>
-                        <CardContent className="prose prose-sm max-w-none p-6 dark:prose-invert">
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: lessonContent[lessons[currentLesson].id].content
-                                .replace(/^# (.+)$/gm, '<h1 class="text-2xl font-bold mt-6 mb-4">$1</h1>')
-                                .replace(/^## (.+)$/gm, '<h2 class="text-xl font-bold mt-4 mb-3">$1</h2>')
-                                .replace(/^\*\*(.+?)\*\*$/gm, '<p class="font-bold mt-2">$1</p>')
-                                .replace(/^- (.+)$/gm, '<li class="ml-4">$1</li>'),
-                            }}
-                          />
-                        </CardContent>
-                      </Card>
-
-                      {/* 本课要点 */}
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className="flex items-center gap-2">
-                            <span>📌</span>
-                            <span>本课要点</span>
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <ul className="space-y-3">
-                            {lessonContent[lessons[currentLesson].id].keyPoints.map((point, idx) => (
-                              <li key={idx} className="flex items-start gap-3">
-                                <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-                                <span className="text-sm leading-relaxed">{point}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </CardContent>
-                      </Card>
-                    </>
-                  ) : (
+                    {/* 课程正文 */}
                     <Card>
-                      <CardContent className="p-12 text-center">
-                        <p className="text-muted-foreground">课程内容开发中...</p>
+                      <CardContent className="prose prose-sm max-w-none p-4 text-xs dark:prose-invert">
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: lessonContent[lessons[currentLesson].id].content
+                              .replace(/^# (.+)$/gm, '<h1 class="text-lg font-bold mt-4 mb-2">$1</h1>')
+                              .replace(/^## (.+)$/gm, '<h2 class="text-base font-bold mt-3 mb-2">$1</h2>')
+                              .replace(/^\*\*(.+?)\*\*$/gm, '<p class="font-bold mt-1">$1</p>')
+                              .replace(/^- (.+)$/gm, '<li class="ml-3 text-xs">$1</li>'),
+                          }}
+                        />
                       </CardContent>
                     </Card>
-                  )}
-                </div>
-              </ScrollArea>
 
-              {/* 课程导航 */}
-              <div className="flex flex-shrink-0 items-center justify-between border-t pt-4">
-                <Button
-                  variant="outline"
-                  onClick={() => setCurrentLesson(Math.max(0, currentLesson - 1))}
-                  disabled={currentLesson === 0}
-                >
-                  上一课
-                </Button>
-                <Button
-                  onClick={() => {
-                    if (currentLesson < lessons.length - 1) {
-                      setCurrentLesson(currentLesson + 1);
-                    } else {
-                      setSelectedTab('quiz');
-                    }
-                  }}
-                  disabled={lessons[currentLesson].locked}
-                >
-                  {currentLesson < lessons.length - 1 ? '下一课' : '开始测试'}
-                </Button>
-              </div>
-            </div>
-          </TabsContent>
-
-          {/* 课程测试 */}
-          <TabsContent value="quiz" className="m-0 flex-1 overflow-hidden px-6">
-            <ScrollArea className="h-full">
-              <div className="space-y-6 pb-6">
-                {!quizSubmitted ? (
-                  <>
-                    {/* 测试说明 */}
+                    {/* 本课要点 */}
                     <Card>
-                      <CardHeader>
-                        <CardTitle>课程测试</CardTitle>
-                        <CardDescription>
-                          完成以下 {quizzes.length} 道题目，测试你的学习成果。需要答对{' '}
-                          {Math.ceil(quizzes.length * 0.6)} 题以上才能通过。
-                        </CardDescription>
+                      <CardHeader className="p-4">
+                        <CardTitle className="flex items-center gap-2 text-base">
+                          <span>📌</span>
+                          <span>本课要点</span>
+                        </CardTitle>
                       </CardHeader>
+                      <CardContent className="p-4 pt-0">
+                        <ul className="space-y-2">
+                          {lessonContent[lessons[currentLesson].id].keyPoints.map((point, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <CheckCircle2 className="mt-0.5 h-3 w-3 flex-shrink-0 text-primary" />
+                              <span className="text-xs leading-relaxed">{point}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </CardContent>
                     </Card>
-
-                    {/* 测试题目 */}
-                    {quizzes.map((quiz, index) => (
-                      <Card key={quiz.id}>
-                        <CardHeader>
-                          <CardTitle className="text-base font-semibold">
-                            {index + 1}. {quiz.question}
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="space-y-2">
-                            {quiz.options.map((option, optionIndex) => (
-                              <button
-                                key={optionIndex}
-                                onClick={() => setQuizAnswers({ ...quizAnswers, [quiz.id]: optionIndex })}
-                                className={cn(
-                                  'w-full rounded-lg border p-4 text-left text-sm transition-all hover:border-primary hover:bg-accent/50',
-                                  quizAnswers[quiz.id] === optionIndex && 'border-primary bg-primary/10'
-                                )}
-                              >
-                                <div className="flex items-start gap-3">
-                                  <div
-                                    className={cn(
-                                      'mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2',
-                                      quizAnswers[quiz.id] === optionIndex
-                                        ? 'border-primary bg-primary'
-                                        : 'border-muted-foreground'
-                                    )}
-                                  >
-                                    {quizAnswers[quiz.id] === optionIndex && (
-                                      <div className="h-2 w-2 rounded-full bg-primary-foreground" />
-                                    )}
-                                  </div>
-                                  <span className="flex-1 leading-relaxed">{option}</span>
-                                </div>
-                              </button>
-                            ))}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-
-                    {/* 提交按钮 */}
-                    <Button
-                      onClick={handleQuizSubmit}
-                      disabled={Object.keys(quizAnswers).length < quizzes.length}
-                      className="w-full"
-                      size="lg"
-                    >
-                      提交答案
-                    </Button>
                   </>
                 ) : (
-                  <>
-                    {/* 测试结果 */}
-                    <Card
-                      className={cn(
-                        'border-2',
-                        score >= 60
-                          ? 'border-green-500 bg-green-50 dark:bg-green-950'
-                          : 'border-red-500 bg-red-50 dark:bg-red-950'
-                      )}
-                    >
-                      <CardHeader>
-                        <div className="flex items-center justify-between">
-                          <div className="space-y-1">
-                            <CardTitle className="text-2xl">
-                              {score >= 60 ? '🎉 恭喜通过！' : '😔 未通过测试'}
-                            </CardTitle>
-                            <CardDescription>
-                              {score >= 60 ? '你已经掌握了本课程的核心内容' : '建议重新学习课程内容后再次测试'}
-                            </CardDescription>
-                          </div>
-                          <div className="text-center">
-                            <div className="text-5xl font-bold text-primary">{score}</div>
-                            <div className="text-sm text-muted-foreground">分</div>
-                          </div>
-                        </div>
+                  <Card>
+                    <CardContent className="p-8 text-center">
+                      <p className="text-xs text-muted-foreground">课程内容开发中...</p>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* 课程导航 */}
+                <div className="flex items-center justify-between border-t pt-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setCurrentLesson(Math.max(0, currentLesson - 1))}
+                    disabled={currentLesson === 0}
+                    className="text-xs"
+                  >
+                    上一课
+                  </Button>
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      if (currentLesson < lessons.length - 1) {
+                        setCurrentLesson(currentLesson + 1);
+                      } else {
+                        setSelectedTab('quiz');
+                      }
+                    }}
+                    disabled={lessons[currentLesson].locked}
+                    className="text-xs"
+                  >
+                    {currentLesson < lessons.length - 1 ? '下一课' : '开始测试'}
+                  </Button>
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* 课程测试 */}
+            <TabsContent value="quiz" className="m-0 space-y-4">
+              {!quizSubmitted ? (
+                <>
+                  {/* 测试说明 */}
+                  <Card>
+                    <CardHeader className="p-4">
+                      <CardTitle className="text-base">课程测试</CardTitle>
+                      <CardDescription className="text-xs">
+                        完成以下 {quizzes.length} 道题目，测试你的学习成果。需要答对{' '}
+                        {Math.ceil(quizzes.length * 0.6)} 题以上才能通过。
+                      </CardDescription>
+                    </CardHeader>
+                  </Card>
+
+                  {/* 测试题目 */}
+                  {quizzes.map((quiz, index) => (
+                    <Card key={quiz.id}>
+                      <CardHeader className="p-4">
+                        <CardTitle className="text-sm font-semibold">
+                          {index + 1}. {quiz.question}
+                        </CardTitle>
                       </CardHeader>
-                    </Card>
-
-                    {/* 答案解析 */}
-                    {quizzes.map((quiz, index) => (
-                      <Card key={quiz.id}>
-                        <CardHeader>
-                          <CardTitle className="text-base font-semibold">
-                            {index + 1}. {quiz.question}
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="space-y-2">
-                            {quiz.options.map((option, optionIndex) => {
-                              const isCorrect = optionIndex === quiz.correctAnswer;
-                              const isSelected = quizAnswers[quiz.id] === optionIndex;
-                              const showResult = isCorrect || isSelected;
-
-                              return (
+                      <CardContent className="p-4 pt-0">
+                        <div className="space-y-2">
+                          {quiz.options.map((option, optionIndex) => (
+                            <button
+                              key={optionIndex}
+                              onClick={() => setQuizAnswers({ ...quizAnswers, [quiz.id]: optionIndex })}
+                              className={cn(
+                                'w-full rounded-lg border p-3 text-left text-xs transition-all hover:border-primary hover:bg-accent/50',
+                                quizAnswers[quiz.id] === optionIndex && 'border-primary bg-primary/10'
+                              )}
+                            >
+                              <div className="flex items-start gap-2">
                                 <div
-                                  key={optionIndex}
                                   className={cn(
-                                    'rounded-lg border p-4 text-sm',
-                                    isCorrect && 'border-green-500 bg-green-50 dark:bg-green-950',
-                                    isSelected && !isCorrect && 'border-red-500 bg-red-50 dark:bg-red-950',
-                                    !showResult && 'opacity-50'
+                                    'mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border-2',
+                                    quizAnswers[quiz.id] === optionIndex
+                                      ? 'border-primary bg-primary'
+                                      : 'border-muted-foreground'
                                   )}
                                 >
-                                  <div className="flex items-center justify-between gap-3">
-                                    <span className="flex-1 leading-relaxed">{option}</span>
-                                    <div className="flex-shrink-0">
-                                      {isCorrect && <Badge variant="default">正确答案</Badge>}
-                                      {isSelected && !isCorrect && <Badge variant="destructive">你的答案</Badge>}
-                                    </div>
+                                  {quizAnswers[quiz.id] === optionIndex && (
+                                    <div className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />
+                                  )}
+                                </div>
+                                <span className="flex-1 leading-relaxed">{option}</span>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+
+                  {/* 提交按钮 */}
+                  <Button
+                    onClick={handleQuizSubmit}
+                    disabled={Object.keys(quizAnswers).length < quizzes.length}
+                    className="w-full text-xs"
+                    size="sm"
+                  >
+                    提交答案
+                  </Button>
+                </>
+              ) : (
+                <>
+                  {/* 测试结果 */}
+                  <Card
+                    className={cn(
+                      'border-2',
+                      score >= 60
+                        ? 'border-green-500 bg-green-50 dark:bg-green-950'
+                        : 'border-red-500 bg-red-50 dark:bg-red-950'
+                    )}
+                  >
+                    <CardHeader className="p-4">
+                      <div className="flex items-center justify-between">
+                        <div className="space-y-0.5">
+                          <CardTitle className="text-lg">
+                            {score >= 60 ? '🎉 恭喜通过！' : '😔 未通过测试'}
+                          </CardTitle>
+                          <CardDescription className="text-xs">
+                            {score >= 60 ? '你已经掌握了本课程的核心内容' : '建议重新学习课程内容后再次测试'}
+                          </CardDescription>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-3xl font-bold text-primary">{score}</div>
+                          <div className="text-xs text-muted-foreground">分</div>
+                        </div>
+                      </div>
+                    </CardHeader>
+                  </Card>
+
+                  {/* 答案解析 */}
+                  {quizzes.map((quiz, index) => (
+                    <Card key={quiz.id}>
+                      <CardHeader className="p-4">
+                        <CardTitle className="text-sm font-semibold">
+                          {index + 1}. {quiz.question}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="p-4 pt-0">
+                        <div className="space-y-2">
+                          {quiz.options.map((option, optionIndex) => {
+                            const isCorrect = optionIndex === quiz.correctAnswer;
+                            const isSelected = quizAnswers[quiz.id] === optionIndex;
+                            const showResult = isCorrect || isSelected;
+
+                            return (
+                              <div
+                                key={optionIndex}
+                                className={cn(
+                                  'rounded-lg border p-3 text-xs',
+                                  isCorrect && 'border-green-500 bg-green-50 dark:bg-green-950',
+                                  isSelected && !isCorrect && 'border-red-500 bg-red-50 dark:bg-red-950',
+                                  !showResult && 'opacity-50'
+                                )}
+                              >
+                                <div className="flex items-center justify-between gap-2">
+                                  <span className="flex-1 leading-relaxed">{option}</span>
+                                  <div className="flex-shrink-0">
+                                    {isCorrect && (
+                                      <Badge variant="default" className="text-[10px]">
+                                        正确答案
+                                      </Badge>
+                                    )}
+                                    {isSelected && !isCorrect && (
+                                      <Badge variant="destructive" className="text-[10px]">
+                                        你的答案
+                                      </Badge>
+                                    )}
                                   </div>
                                 </div>
-                              );
-                            })}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
 
-                    {/* 操作按钮 */}
-                    <div className="flex gap-4">
-                      <Button onClick={handleQuizReset} variant="outline" className="flex-1" size="lg">
-                        重新测试
+                  {/* 操作按钮 */}
+                  <div className="flex gap-3">
+                    <Button onClick={handleQuizReset} variant="outline" className="flex-1 text-xs" size="sm">
+                      重新测试
+                    </Button>
+                    {score >= 60 && (
+                      <Button className="flex-1 text-xs" size="sm">
+                        <Award className="mr-1.5 h-3 w-3" />
+                        获取证书
                       </Button>
-                      {score >= 60 && (
-                        <Button className="flex-1" size="lg">
-                          <Award className="mr-2 h-4 w-4" />
-                          获取证书
-                        </Button>
-                      )}
-                    </div>
-                  </>
-                )}
-              </div>
-            </ScrollArea>
-          </TabsContent>
-        </Tabs>
-      </div>
+                    )}
+                  </div>
+                </>
+              )}
+            </TabsContent>
+          </Tabs>
+        </div>
+      </ScrollArea>
     </div>
   );
 }
