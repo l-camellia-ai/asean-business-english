@@ -149,15 +149,16 @@
   - [x] 统一处理流程（语音/文字双模式）
   - [x] 重新部署phone-call-dialogue Edge Function
   - [x] 完美解决无VPN环境下的语音识别问题
-- [x] 步骤35：彻底修复标准化训练页面布局问题
-  - [x] 修改Dialog宽度为max-w-[95vw] md:max-w-4xl响应式
-  - [x] Dialog添加max-h-[90vh]和overflow-hidden
-  - [x] 重构Dialog内部结构（DialogHeader + 内容区）
-  - [x] 移除StandardTraining的CardHeader和CardContent包装
-  - [x] 改用原生div结构配合px-6 py-4内边距
-  - [x] 确保所有内容在视口内完整显示
-  - [x] 优化TabsList内边距为px-6
-  - [x] 优化所有TabsContent内边距为px-6 py-4
+- [x] 步骤36：完全重写标准化训练组件参考清晰布局
+  - [x] 分析参考图片（东盟国别文化指南）的布局特点
+  - [x] 完全重写StandardTraining组件（700+行代码）
+  - [x] 创建清晰的课程头部信息卡片（标题+描述+级别+进度+统计）
+  - [x] 优化Tab导航布局（mx-6 mb-4 w-auto justify-start）
+  - [x] 重新设计课程概览（课程介绍+课程列表卡片）
+  - [x] 重新设计课程内容（选择器+配图+正文+要点）
+  - [x] 重新设计课程测试（说明+题目+结果+解析）
+  - [x] 确保所有内容清晰完整显示不被裁切
+  - [x] 删除旧版本和备份文件
   - [x] 代码质量检查通过（105个文件）
 
 ## 注释
