@@ -357,52 +357,52 @@ export default function StandardTraining({
   };
 
   return (
-    <div className="flex h-[600px] flex-col">
+    <div className="flex h-full max-h-[85vh] flex-col">
       {/* 课程头部 */}
-      <CardHeader className="border-b border-border">
-        <div className="flex items-start justify-between">
-          <div className="space-y-1">
-            <CardTitle className="text-lg">{courseTitle}</CardTitle>
-            <CardDescription>{courseDescription}</CardDescription>
+      <CardHeader className="flex-shrink-0 border-b border-border">
+        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+          <div className="flex-1 space-y-2">
+            <CardTitle className="text-lg md:text-xl">{courseTitle}</CardTitle>
+            <CardDescription className="text-sm">{courseDescription}</CardDescription>
             <Badge variant="outline">{courseLevel}</Badge>
           </div>
-          <div className="text-right">
+          <div className="text-left md:text-right">
             <div className="text-sm font-medium text-muted-foreground">学习进度</div>
             <div className="text-2xl font-bold text-primary">{Math.round(progress)}%</div>
           </div>
         </div>
-        <Progress value={progress} className="mt-2" />
+        <Progress value={progress} className="mt-4" />
       </CardHeader>
 
       {/* 内容区域 */}
       <CardContent className="flex-1 overflow-hidden p-0">
-        <Tabs value={selectedTab} onValueChange={setSelectedTab} className="h-full">
-          <TabsList className="w-full justify-start rounded-none border-b px-4">
-            <TabsTrigger value="overview">
+        <Tabs value={selectedTab} onValueChange={setSelectedTab} className="flex h-full flex-col">
+          <TabsList className="w-full flex-shrink-0 justify-start overflow-x-auto rounded-none border-b px-4">
+            <TabsTrigger value="overview" className="flex-shrink-0">
               <BookOpen className="mr-2 h-4 w-4" />
               课程概览
             </TabsTrigger>
-            <TabsTrigger value="lessons">
+            <TabsTrigger value="lessons" className="flex-shrink-0">
               <Play className="mr-2 h-4 w-4" />
               课程内容
             </TabsTrigger>
-            <TabsTrigger value="quiz">
+            <TabsTrigger value="quiz" className="flex-shrink-0">
               <FileText className="mr-2 h-4 w-4" />
               课程测试
             </TabsTrigger>
           </TabsList>
 
           {/* 课程概览 */}
-          <TabsContent value="overview" className="h-full p-4">
-            <ScrollArea className="h-full">
+          <TabsContent value="overview" className="m-0 flex-1 overflow-hidden p-4">
+            <ScrollArea className="h-full pr-4">
               <div className="space-y-4">
                 <Card>
                   <CardHeader>
                     <CardTitle>课程介绍</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-muted-foreground">{courseDescription}</p>
-                    <div className="grid gap-4 md:grid-cols-3">
+                    <p className="text-sm text-muted-foreground">{courseDescription}</p>
+                    <div className="grid gap-4 sm:grid-cols-3">
                       <div className="space-y-1">
                         <div className="text-sm font-medium">课程级别</div>
                         <div className="text-2xl font-bold text-primary">{courseLevel}</div>
@@ -429,26 +429,26 @@ export default function StandardTraining({
                         <div
                           key={lesson.id}
                           className={cn(
-                            'flex items-center justify-between rounded-lg border p-3',
+                            'flex flex-col gap-2 rounded-lg border p-3 sm:flex-row sm:items-center sm:justify-between',
                             lesson.locked && 'opacity-50'
                           )}
                         >
-                          <div className="flex items-center space-x-3">
+                          <div className="flex items-start space-x-3">
                             {lesson.completed ? (
-                              <CheckCircle2 className="h-5 w-5 text-green-500" />
+                              <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
                             ) : lesson.locked ? (
-                              <Lock className="h-5 w-5 text-muted-foreground" />
+                              <Lock className="mt-0.5 h-5 w-5 flex-shrink-0 text-muted-foreground" />
                             ) : (
-                              <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-primary text-xs font-bold text-primary">
+                              <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2 border-primary text-xs font-bold text-primary">
                                 {index + 1}
                               </div>
                             )}
-                            <div>
-                              <div className="font-medium">{lesson.title}</div>
-                              <div className="text-sm text-muted-foreground">{lesson.description}</div>
+                            <div className="min-w-0 flex-1">
+                              <div className="break-words font-medium">{lesson.title}</div>
+                              <div className="break-words text-sm text-muted-foreground">{lesson.description}</div>
                             </div>
                           </div>
-                          <div className="text-sm text-muted-foreground">{lesson.duration}</div>
+                          <div className="flex-shrink-0 text-sm text-muted-foreground">{lesson.duration}</div>
                         </div>
                       ))}
                     </div>
@@ -459,10 +459,10 @@ export default function StandardTraining({
           </TabsContent>
 
           {/* 课程内容 */}
-          <TabsContent value="lessons" className="h-full p-4">
+          <TabsContent value="lessons" className="m-0 flex flex-1 flex-col overflow-hidden p-4">
             <div className="flex h-full flex-col space-y-4">
               {/* 课程选择器 */}
-              <div className="flex items-center space-x-2 overflow-x-auto pb-2">
+              <div className="flex flex-shrink-0 items-center space-x-2 overflow-x-auto pb-2">
                 {lessons.map((lesson, index) => (
                   <Button
                     key={lesson.id}
@@ -479,32 +479,32 @@ export default function StandardTraining({
               </div>
 
               {/* 课程内容 */}
-              <ScrollArea className="flex-1">
+              <ScrollArea className="flex-1 pr-4">
                 <div className="prose prose-sm max-w-none dark:prose-invert">
                   <div className="mb-4">
-                    <h2 className="text-xl font-bold">{lessons[currentLesson].title}</h2>
-                    <p className="text-muted-foreground">{lessons[currentLesson].description}</p>
+                    <h2 className="break-words text-xl font-bold">{lessons[currentLesson].title}</h2>
+                    <p className="break-words text-muted-foreground">{lessons[currentLesson].description}</p>
                   </div>
 
                   {lessonContent[lessons[currentLesson].id] ? (
                     <>
                       {/* 课程配图 */}
                       <div className="mb-6 overflow-hidden rounded-lg border bg-muted shadow-sm">
-                        <img 
-                          src={lessonContent[lessons[currentLesson].id].image} 
+                        <img
+                          src={lessonContent[lessons[currentLesson].id].image}
                           alt={lessons[currentLesson].title}
                           className="h-48 w-full object-cover md:h-64"
                         />
                       </div>
 
                       <div
-                        className="whitespace-pre-wrap"
+                        className="break-words whitespace-pre-wrap"
                         dangerouslySetInnerHTML={{
                           __html: lessonContent[lessons[currentLesson].id].content
                             .replace(/^# (.+)$/gm, '<h1 class="text-2xl font-bold mt-6 mb-4">$1</h1>')
                             .replace(/^## (.+)$/gm, '<h2 class="text-xl font-bold mt-4 mb-3">$1</h2>')
                             .replace(/^\*\*(.+?)\*\*$/gm, '<p class="font-bold mt-2">$1</p>')
-                            .replace(/^- (.+)$/gm, '<li class="ml-4">$1</li>')
+                            .replace(/^- (.+)$/gm, '<li class="ml-4">$1</li>'),
                         }}
                       />
 
@@ -517,7 +517,7 @@ export default function StandardTraining({
                             {lessonContent[lessons[currentLesson].id].keyPoints.map((point, idx) => (
                               <li key={idx} className="flex items-start space-x-2">
                                 <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                                <span className="text-sm">{point}</span>
+                                <span className="break-words text-sm">{point}</span>
                               </li>
                             ))}
                           </ul>
@@ -531,7 +531,7 @@ export default function StandardTraining({
               </ScrollArea>
 
               {/* 课程导航 */}
-              <div className="flex items-center justify-between border-t pt-4">
+              <div className="flex flex-shrink-0 items-center justify-between border-t pt-4">
                 <Button
                   variant="outline"
                   onClick={() => setCurrentLesson(Math.max(0, currentLesson - 1))}
@@ -556,16 +556,17 @@ export default function StandardTraining({
           </TabsContent>
 
           {/* 课程测试 */}
-          <TabsContent value="quiz" className="h-full p-4">
-            <ScrollArea className="h-full">
-              <div className="space-y-6">
+          <TabsContent value="quiz" className="m-0 flex-1 overflow-hidden p-4">
+            <ScrollArea className="h-full pr-4">
+              <div className="space-y-6 pb-4">
                 {!quizSubmitted ? (
                   <>
                     <Card>
                       <CardHeader>
                         <CardTitle>课程测试</CardTitle>
-                        <CardDescription>
-                          完成以下{quizzes.length}道题目，测试你的学习成果。需要答对{Math.ceil(quizzes.length * 0.6)}题以上才能通过。
+                        <CardDescription className="break-words">
+                          完成以下{quizzes.length}道题目，测试你的学习成果。需要答对{Math.ceil(quizzes.length * 0.6)}
+                          题以上才能通过。
                         </CardDescription>
                       </CardHeader>
                     </Card>
@@ -573,7 +574,7 @@ export default function StandardTraining({
                     {quizzes.map((quiz, index) => (
                       <Card key={quiz.id}>
                         <CardHeader>
-                          <CardTitle className="text-base">
+                          <CardTitle className="break-words text-base">
                             {index + 1}. {quiz.question}
                           </CardTitle>
                         </CardHeader>
@@ -588,10 +589,10 @@ export default function StandardTraining({
                                   quizAnswers[quiz.id] === optionIndex && 'border-primary bg-primary/10'
                                 )}
                               >
-                                <div className="flex items-center space-x-2">
+                                <div className="flex items-start space-x-2">
                                   <div
                                     className={cn(
-                                      'flex h-5 w-5 items-center justify-center rounded-full border-2',
+                                      'mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2',
                                       quizAnswers[quiz.id] === optionIndex
                                         ? 'border-primary bg-primary'
                                         : 'border-muted-foreground'
@@ -601,7 +602,7 @@ export default function StandardTraining({
                                       <div className="h-2 w-2 rounded-full bg-primary-foreground" />
                                     )}
                                   </div>
-                                  <span>{option}</span>
+                                  <span className="break-words text-sm">{option}</span>
                                 </div>
                               </button>
                             ))}
@@ -621,20 +622,22 @@ export default function StandardTraining({
                   </>
                 ) : (
                   <>
-                    <Card className={cn(
-                      'border-2',
-                      score >= 60 ? 'border-green-500 bg-green-50 dark:bg-green-950' : 'border-red-500 bg-red-50 dark:bg-red-950'
-                    )}>
+                    <Card
+                      className={cn(
+                        'border-2',
+                        score >= 60
+                          ? 'border-green-500 bg-green-50 dark:bg-green-950'
+                          : 'border-red-500 bg-red-50 dark:bg-red-950'
+                      )}
+                    >
                       <CardHeader>
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <CardTitle className="text-2xl">
+                        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                          <div className="flex-1">
+                            <CardTitle className="text-xl sm:text-2xl">
                               {score >= 60 ? '🎉 恭喜通过！' : '😔 未通过测试'}
                             </CardTitle>
-                            <CardDescription>
-                              {score >= 60
-                                ? '你已经掌握了本课程的核心内容'
-                                : '建议重新学习课程内容后再次测试'}
+                            <CardDescription className="break-words">
+                              {score >= 60 ? '你已经掌握了本课程的核心内容' : '建议重新学习课程内容后再次测试'}
                             </CardDescription>
                           </div>
                           <div className="text-center">
@@ -648,7 +651,7 @@ export default function StandardTraining({
                     {quizzes.map((quiz, index) => (
                       <Card key={quiz.id}>
                         <CardHeader>
-                          <CardTitle className="text-base">
+                          <CardTitle className="break-words text-base">
                             {index + 1}. {quiz.question}
                           </CardTitle>
                         </CardHeader>
@@ -669,10 +672,12 @@ export default function StandardTraining({
                                     !showResult && 'opacity-50'
                                   )}
                                 >
-                                  <div className="flex items-center justify-between">
-                                    <span>{option}</span>
-                                    {isCorrect && <Badge variant="default">正确答案</Badge>}
-                                    {isSelected && !isCorrect && <Badge variant="destructive">你的答案</Badge>}
+                                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                                    <span className="break-words text-sm">{option}</span>
+                                    <div className="flex-shrink-0">
+                                      {isCorrect && <Badge variant="default">正确答案</Badge>}
+                                      {isSelected && !isCorrect && <Badge variant="destructive">你的答案</Badge>}
+                                    </div>
                                   </div>
                                 </div>
                               );
@@ -682,7 +687,7 @@ export default function StandardTraining({
                       </Card>
                     ))}
 
-                    <div className="flex space-x-4">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:space-x-4">
                       <Button onClick={handleQuizReset} variant="outline" className="flex-1">
                         重新测试
                       </Button>

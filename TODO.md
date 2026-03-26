@@ -149,14 +149,15 @@
   - [x] 统一处理流程（语音/文字双模式）
   - [x] 重新部署phone-call-dialogue Edge Function
   - [x] 完美解决无VPN环境下的语音识别问题
-- [x] 步骤33：实现启动时登录弹窗功能
-  - [x] 创建LoginDialog组件（将LoginPage改造为弹窗）
-  - [x] 修改App.tsx添加启动时登录检查逻辑
-  - [x] 实现游客模式持久化（localStorage）
-  - [x] 实现登录成功后关闭弹窗
-  - [x] 实现注册成功后跳转到引导页
-  - [x] 添加加载状态优化（避免闪烁）
-  - [x] 创建详细的实施报告文档
+- [x] 步骤34：修复标准化训练页面布局问题
+  - [x] 定位问题：固定高度h-[600px]导致内容被裁切
+  - [x] 修改容器高度为h-full max-h-[85vh]实现响应式
+  - [x] 优化Tabs组件为flex布局（flex flex-col）
+  - [x] 为所有TabsContent添加overflow-hidden和ScrollArea
+  - [x] 添加flex-shrink-0防止头部和导航被压缩
+  - [x] 优化响应式布局（sm:、md:断点）
+  - [x] 添加break-words防止长文本溢出
+  - [x] 优化按钮和卡片的响应式设计
   - [x] 代码质量检查通过（105个文件）
 
 ## 注释
