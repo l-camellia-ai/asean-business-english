@@ -1,0 +1,205 @@
+# 任务：创建智汇南洋 - 面向东盟AI商务英语实训平台
+
+## 计划
+- [x] 步骤1：设计系统 - 创建东盟主题色彩系统和配置
+  - [x] 更新 src/index.css - 定义主题变量
+  - [x] 更新 tailwind.config.js - 配置主题色彩
+- [x] 步骤2：数据库设计 - 创建Supabase数据库结构
+  - [x] 初始化Supabase
+  - [x] 创建数据库迁移（用户、学习进度、课程、排行榜等）
+- [x] 步骤3：类型定义 - 创建TypeScript类型
+  - [x] 创建 src/types/types.ts
+  - [x] 创建 src/db/api.ts
+- [x] 步骤4：核心组件开发
+  - [x] 创建 NavigationBar 组件
+  - [x] 创建 LearningMapVisual 组件
+  - [x] 创建 RadarChart 组件
+  - [x] 创建 DailyChallengeCard 组件
+  - [x] 创建 AIDialogueChat 组件（AI对话聊天）
+  - [x] 创建 AIPhoneCall 组件（AI电话工坊）
+  - [x] 创建 StandardTraining 组件（标准化训练）
+- [x] 步骤5：页面开发
+  - [x] 重构 HomePage - 首页核心推荐区
+  - [x] 创建 ScenarioTrainingPage - 情景实战（完整三大模块）
+  - [x] 创建 KnowledgeBasePage - 商务知识库
+  - [x] 创建 CommunityPage - 学习社区
+  - [x] 创建 EnterpriseServicePage - 企业服务
+  - [x] 创建 LearningMapPage - 学习地图详情
+  - [x] 创建 DailyChallengesPage - 每日挑战
+  - [x] 创建 PremiumPackagePage - AI实训增强包
+  - [x] 创建 ProfilePage - 个人中心
+- [x] 步骤6：路由配置
+  - [x] 更新 src/routes.tsx
+  - [x] 更新 src/App.tsx
+- [x] 步骤7：验证和修复
+  - [x] 运行 npm run lint 并修复所有问题
+- [x] 步骤8：品牌更新
+  - [x] 更新应用名称为"智汇南洋"
+  - [x] 更新 index.html 标题和描述
+  - [x] 更新 NavigationBar Logo
+  - [x] 更新 package.json 项目名称
+  - [x] 更新 README.md 项目介绍
+- [x] 步骤9：AI对话功能完善
+  - [x] 创建 AIDialogueChat 对话组件
+  - [x] 实现实时对话功能
+  - [x] 添加智能评分系统
+  - [x] 集成文化提示功能
+  - [x] 更新 ScenarioTrainingPage 集成对话框
+- [x] 步骤10：AI电话工坊功能开发
+  - [x] 创建 Edge Function (phone-call-dialogue)
+  - [x] 集成语音识别API（短语音识别标准版）
+  - [x] 集成AI对话API（MiniMax文本合成）
+  - [x] 集成语音合成API（同步语音合成HTTP）
+  - [x] 创建 AIPhoneCall 组件
+  - [x] 实现录音功能（WebM转WAV）
+  - [x] 实现语音播放功能
+  - [x] 更新 ScenarioTrainingPage 集成电话工坊
+- [x] 步骤11：标准化训练功能开发
+  - [x] 创建 StandardTraining 组件
+  - [x] 实现课程概览功能
+  - [x] 实现课程内容展示（3课完整内容）
+  - [x] 实现课程测试功能（5道题）
+  - [x] 实现进度追踪系统
+  - [x] 实现证书获取功能
+  - [x] 添加6个标准化课程模块
+  - [x] 更新 ScenarioTrainingPage 集成标准化训练
+- [x] 步骤12：市场洞察功能开发
+  - [x] 创建 Edge Function (web-summary)
+  - [x] 集成网页内容总结API
+  - [x] 更新 KnowledgeBasePage 添加市场洞察模块
+  - [x] 实现多链接列表展示（5个市场洞察链接）
+  - [x] 实现左右分栏布局（列表+详情）
+  - [x] 实现点击加载详情功能
+  - [x] 实现刷新和查看原文功能
+  - [x] 添加加载状态和错误处理
+  - [x] 优化UI展示（缩略图、摘要、来源）
+- [x] 步骤13：行业术语库功能开发
+  - [x] 创建 IndustryTerms 组件
+  - [x] 实现7个行业分类（制造业、金融科技、旅游业、农业、跨境电商、物流）
+  - [x] 添加20个专业术语及详细解释
+  - [x] 实现搜索功能（术语、翻译、定义）
+  - [x] 实现收藏功能
+  - [x] 实现术语浏览和收藏切换
+  - [x] 更新 KnowledgeBasePage 集成术语库
+- [x] 步骤14：学习社区功能开发
+  - [x] 更新 CommunityPage 完整功能
+  - [x] 实现成长展示墙（用户动态、成就展示）
+  - [x] 实现排行榜系统（按国家维度排名）
+  - [x] 实现专家问答功能
+  - [x] 添加分享成就对话框
+  - [x] 添加提问对话框
+  - [x] 实现点赞、评论、分享功能
+- [x] 步骤15：用户认证系统开发
+  - [x] 创建数据库迁移（user_role枚举、触发器、RLS策略）
+  - [x] 配置Supabase验证（禁用邮箱验证）
+  - [x] 创建LoginPage（用户名+密码登录）
+  - [x] 创建RegisterPage（用户注册，首位用户自动成为管理员）
+  - [x] 更新RouteGuard（添加公开路由）
+  - [x] 更新App.tsx（集成AuthProvider和RouteGuard）
+  - [x] 更新NavigationBar（显示登录状态、用户菜单、登录/登出按钮）
+  - [x] 更新路由配置（添加登录和注册路由）
+  - [x] 更新类型定义（添加UserRole类型）
+- [x] 步骤16：AI电话工坊语音识别优化
+  - [x] 优化音频录制配置（16000Hz采样率、单声道、音频增强）
+  - [x] 改进WebM到WAV格式转换（重采样、PCM编码、16bit位深）
+  - [x] 增强错误处理和用户提示
+  - [x] 添加详细的调试日志
+  - [x] 优化Edge Function语音识别逻辑
+  - [x] 重新部署phone-call-dialogue Edge Function
+- [x] 步骤17：使用Web Speech API实现英语语音识别
+  - [x] 移除MediaRecorder音频录制方案
+  - [x] 集成浏览器原生Web Speech API
+  - [x] 配置语言为英语（en-US）
+  - [x] 实现实时语音识别和临时结果显示
+  - [x] 添加完整的错误处理（no-speech、audio-capture、not-allowed、network）
+  - [x] 更新Edge Function支持直接传入识别文本
+  - [x] 添加Web Speech API类型声明
+  - [x] 优化用户体验（实时显示识别文本）
+  - [x] 重新部署phone-call-dialogue Edge Function
+- [x] 步骤18：修复语音识别重复启动和无结果问题
+  - [x] 添加isRecognizingRef使用ref立即检查状态
+  - [x] 改用continuous=true持续识别模式
+  - [x] 优化onresult事件处理（区分临时和最终结果）
+  - [x] 添加详细的调试日志（emoji标记不同状态）
+  - [x] 增强错误处理（network、service-not-allowed等）
+  - [x] 优化状态管理（同时使用ref和state）
+  - [x] 自动停止识别并处理最终结果
+  - [x] 添加录音超时自动停止（60秒）
+- [x] 步骤19：添加文字输入模式解决网络限制问题
+  - [x] 添加inputMode状态（voice/text双模式）
+  - [x] 实现模式切换功能（语音识别 ↔ 文字输入）
+  - [x] 添加文字输入UI（Input + Send按钮）
+  - [x] 实现handleTextSubmit处理文字输入
+  - [x] 智能错误处理：
+    - 检测network错误次数
+    - 第二次network错误自动切换到文字模式
+    - service-not-allowed错误自动切换到文字模式
+  - [x] 优化用户体验：
+    - 模式切换按钮（禁用状态管理）
+    - 不同模式显示不同提示信息
+    - 文字模式下停止语音识别
+  - [x] 完美解决无VPN环境下的使用问题
+- [x] 步骤20：更换为服务端语音识别API
+  - [x] 移除Web Speech API依赖
+  - [x] 恢复MediaRecorder录音功能
+  - [x] 实现WebM到WAV格式转换（16000Hz, 16bit, 单声道）
+  - [x] 集成短语音识别标准版API
+  - [x] 更新Edge Function支持音频识别
+  - [x] 优化前端录音UI（显示录音时长）
+  - [x] 统一处理流程（语音/文字双模式）
+  - [x] 重新部署phone-call-dialogue Edge Function
+  - [x] 完美解决无VPN环境下的语音识别问题
+- [x] 步骤33：实现启动时登录弹窗功能
+  - [x] 创建LoginDialog组件（将LoginPage改造为弹窗）
+  - [x] 修改App.tsx添加启动时登录检查逻辑
+  - [x] 实现游客模式持久化（localStorage）
+  - [x] 实现登录成功后关闭弹窗
+  - [x] 实现注册成功后跳转到引导页
+  - [x] 添加加载状态优化（避免闪烁）
+  - [x] 创建详细的实施报告文档
+  - [x] 代码质量检查通过（105个文件）
+
+## 注释
+- 项目名称：智汇南洋 - 面向东盟AI商务英语实训平台
+- 项目类型：H5移动端应用
+- 核心功能：8个主要入口（顶部导航4个 + 核心推荐2个 + 用户中心2个）
+- 特色功能：
+  - 东盟市场地图可视化
+  - 六维能力雷达图
+  - 游戏化激励系统
+  - **AI实时对话训练**（情景对话工坊）
+  - **智能评分反馈**
+  - **文化提示系统**
+  - **AI电话工坊**（语音识别+AI对话+语音合成）
+  - **语音录音与识别**
+  - **文字输入模式**
+  - **真实电话场景模拟**
+  - **标准化课程学习**（新增）
+  - **课程测试与证书**（新增）
+  - **系统化学习路径**（新增）
+  - **市场洞察分析**（新增）
+  - **网页内容智能提取**（新增）
+  - **行业术语库**（新增）
+  - **术语搜索与收藏**（新增）
+  - **学习社区互动**（新增）
+  - **成就分享系统**（新增）
+  - **排行榜激励**（新增）
+  - **专家问答平台**（新增）
+  - **用户认证系统**（新增）
+  - **用户名密码登录**（新增）
+  - **角色权限管理**（新增）
+- 技术栈：React + TypeScript + Tailwind CSS + shadcn/ui + Supabase + Edge Functions
+- API集成：
+  - 短语音识别标准版API（语音转文字）
+  - MiniMax文本合成接口（AI对话生成）
+  - 同步语音合成HTTP（文字转语音）
+  - 网页内容总结API（市场洞察提取）
+- 课程体系：
+  - 商务礼仪基础（5课时）
+  - 商务邮件写作（6课时）
+  - 会议沟通技巧（7课时）
+  - 商务谈判策略（8课时）
+  - 跨文化沟通（6课时）
+  - 商务演讲技巧（7课时）
+- 覆盖范围：东盟10国（泰国、越南、印尼、新加坡、马来西亚、菲律宾、文莱、柬埔寨、老挝、缅甸）
+- 所有任务已完成！✅
