@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import NavigationBar from '@/components/NavigationBar';
 import LearningMapVisual from '@/components/LearningMapVisual';
 import DailyChallengeCard from '@/components/DailyChallengeCard';
+import { DigitalHumanCard } from '@/components/AIDigitalHuman';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -14,7 +15,8 @@ import {
   Zap,
   BookOpen,
   Users,
-  Crown
+  Crown,
+  Bot
 } from 'lucide-react';
 import { 
   getUserLearningProgress,
@@ -131,6 +133,12 @@ export default function HomePage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* AI数字人入口 - 突出展示 */}
+        <DigitalHumanCard 
+          onClick={() => navigate('/ai-digital-human')}
+          className="border-primary/20 bg-gradient-to-r from-primary/5 to-secondary/5"
+        />
 
         {/* 快速入口 */}
         <div className="grid gap-4 md:grid-cols-3">

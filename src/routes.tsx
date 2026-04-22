@@ -9,6 +9,7 @@ import PremiumPackagePage from './pages/PremiumPackagePage';
 import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
 import OnboardingPage from './pages/OnboardingPage';
+import AIDigitalHumanPage from './pages/AIDigitalHumanPage';
 import type { ReactNode } from 'react';
 
 interface RouteConfig {
@@ -30,6 +31,12 @@ const routes: RouteConfig[] = [
     path: '/scenario-training',
     element: <ScenarioTrainingPage />,
     visible: true
+  },
+  {
+    name: 'AI数字人',
+    path: '/ai-digital-human',
+    element: <AIDigitalHumanPage />,
+    visible: false
   },
   {
     name: '商务知识库',

@@ -134,3 +134,46 @@ All colors MUST be HSL.
     background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
   }
 }
+
+/* 数字人口型同步动画 */
+@keyframes lip-sync {
+  0%, 100% {
+    transform: scaleY(0.3);
+    border-radius: 50%;
+  }
+  25% {
+    transform: scaleY(0.8);
+    border-radius: 20%;
+  }
+  50% {
+    transform: scaleY(1);
+    border-radius: 10%;
+  }
+  75% {
+    transform: scaleY(0.6);
+    border-radius: 30%;
+  }
+}
+
+@keyframes lip-sync-alt {
+  0%, 100% {
+    transform: scaleY(0.4) scaleX(1);
+    border-radius: 50%;
+  }
+  30% {
+    transform: scaleY(0.9) scaleX(0.9);
+    border-radius: 15%;
+  }
+  60% {
+    transform: scaleY(0.6) scaleX(1.1);
+    border-radius: 25%;
+  }
+}
+
+.animate-lip-sync {
+  animation: lip-sync 0.15s ease-in-out infinite;
+}
+
+.animate-lip-sync-alt {
+  animation: lip-sync-alt 0.2s ease-in-out infinite;
+}
