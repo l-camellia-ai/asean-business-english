@@ -4,6 +4,7 @@ import IntersectObserver from '@/components/common/IntersectObserver';
 import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
 import { RouteGuard } from '@/components/common/RouteGuard';
+import { ErrorBoundary } from '@/components/common/ErrorBoundary';
 import LoginDialog from '@/components/LoginDialog';
 
 import routes from './routes';
@@ -72,12 +73,14 @@ function AppContent() {
         <IntersectObserver />
         <div className="flex min-h-screen flex-col">
           <main className="flex-grow">
-            <Routes>
-              {routes.map((route, index) => (
-                <Route key={index} path={route.path} element={route.element} />
-              ))}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
+            <ErrorBoundary>
+              <Routes>
+                {routes.map((route, index) => (
+                  <Route key={index} path={route.path} element={route.element} />
+                ))}
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </ErrorBoundary>
           </main>
         </div>
         <Toaster />
