@@ -18,7 +18,9 @@ import {
   LogOut,
   User,
   LogIn,
-  Mail
+  Mail,
+  Shield,
+  ArrowUp
 } from 'lucide-react';
 import {
   Sheet,
@@ -68,7 +70,7 @@ interface NavigationBarProps {
 export default function NavigationBar({ userType = 'individual' }: NavigationBarProps) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, profile, signOut } = useAuth();
+  const { user, profile, signOut, becomeAdmin } = useAuth();
   
   const filteredNavItems = navItems.filter(item => {
     if (item.requiresEnterprise) {
@@ -155,6 +157,26 @@ export default function NavigationBar({ userType = 'individual' }: NavigationBar
                     个人中心
                   </Link>
                 </DropdownMenuItem>
+                {profile?.role === 'admin' ? (
+                  <DropdownMenuItem asChild>
+                    <Link to="/admin" className="flex items-center">
+                      <Shield className="mr-2 h-4 w-4" />
+                      管理后台
+                    </Link>
+                  </DropdownMenuItem>
+                ) : (
+                  <DropdownMenuItem onClick={async () => {
+                    const result = await becomeAdmin();
+                    if (result.success) {
+                      toast.success(result.message);
+                    } else {
+                      toast.error(result.message);
+                    }
+                  }}>
+                    <ArrowUp className="mr-2 h-4 w-4" />
+                    提升为管理员
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut}>
                   <LogOut className="mr-2 h-4 w-4" />
@@ -246,6 +268,30 @@ export default function NavigationBar({ userType = 'individual' }: NavigationBar
                       <span>个人中心</span>
                     </Link>
                   </Button>
+                  {profile?.role === 'admin' ? (
+                    <Button variant="ghost" className="justify-start" asChild>
+                      <Link to="/admin" className="flex items-center space-x-3">
+                        <Shield className="h-5 w-5" />
+                        <span>管理后台</span>
+                      </Link>
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="ghost"
+                      className="justify-start"
+                      onClick={async () => {
+                        const result = await becomeAdmin();
+                        if (result.success) {
+                          toast.success(result.message);
+                        } else {
+                          toast.error(result.message);
+                        }
+                      }}
+                    >
+                      <ArrowUp className="mr-3 h-5 w-5" />
+                      <span>提升为管理员</span>
+                    </Button>
+                  )}
                   <Button
                     variant="ghost"
                     className="justify-start text-destructive hover:text-destructive"

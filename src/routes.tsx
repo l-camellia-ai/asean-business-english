@@ -10,6 +10,8 @@ import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
 import OnboardingPage from './pages/OnboardingPage';
 import AIDigitalHumanPage from './pages/AIDigitalHumanPage';
+import DigitalHumanChatPage from './pages/DigitalHumanChatPage';
+import AdminPage from './pages/AdminPage';
 import type { ReactNode } from 'react';
 
 interface RouteConfig {
@@ -37,6 +39,12 @@ const routes: RouteConfig[] = [
     path: '/ai-digital-human',
     element: <AIDigitalHumanPage />,
     visible: false
+  },
+  {
+    name: 'AI英语私教',
+    path: '/digital-human-chat',
+    element: <DigitalHumanChatPage />,
+    visible: true
   },
   {
     name: '商务知识库',
@@ -90,6 +98,12 @@ const routes: RouteConfig[] = [
     name: '新用户引导',
     path: '/onboarding',
     element: <OnboardingPage />,
+    visible: false
+  },
+  {
+    name: '管理后台',
+    path: '/admin',
+    element: <AdminPage />,
     visible: false
   }
 ];

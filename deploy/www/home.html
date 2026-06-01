@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AI 英语私教 - 首页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #e8f4ff 0%, #b8d4ff 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .avatar-card {
+      width: 100%;
+      max-width: 320px;
+      height: 360px;
+      background: #ffffff;
+      border-radius: 24px;
+      margin: 0 auto 30px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #avatar-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      position: relative;
+    }
+
+    #avatar-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    #avatar-image.speaking {
+      animation: speaking-pulse 0.8s infinite;
+    }
+
+    @keyframes speaking-pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.02);
+      }
+    }
+
+    .avatar-overlay {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 12px;
+      text-align: center;
+    }
+
+    .avatar-name {
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .avatar-status {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 13px;
+    }
+
+    .status-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+      background: #48bb78;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .main-panel {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .panel-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .panel-header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .panel-header p {
+      font-size: 12px;
+      color: #a0aec0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .feature-btn {
+      background: #f8fafb;
+      border: none;
+      border-radius: 16px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .feature-btn:active {
+      transform: scale(0.96);
+      background: #f0f4f8;
+    }
+
+    .feature-icon {
+      font-size: 28px;
+    }
+
+    .feature-title {
+      font-size: 13px;
+      color: #4a5568;
+      font-weight: 500;
+    }
+
+    .chat-area {
+      background: #f8fafb;
+      border-radius: 16px;
+      padding: 16px;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chat-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .status-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #a0aec0;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #48bb78;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .chat-messages {
+      flex: 1;
+      min-height: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .chat-message {
+      font-size: 14px;
+      color: #4a5568;
+      line-height: 1.5;
+      padding: 8px 12px;
+      border-radius: 8px;
+      max-width: 100%;
+    }
+
+    .chat-message.user {
+      background: #e6fffa;
+      color: #234e52;
+      align-self: flex-end;
+    }
+
+    .chat-message.avatar {
+      background: #f0f4ff;
+      color: #2d3748;
+      align-self: flex-start;
+    }
+
+    .chat-placeholder {
+      font-size: 13px;
+      color: #cbd5e0;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .mic-btn-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .mic-btn {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      transition: all 0.3s ease;
+      border: none;
+      color: #ffffff;
+    }
+
+    .mic-btn:active {
+      transform: scale(0.95);
+    }
+
+    .mic-btn.recording {
+      animation: recording 1.5s infinite;
+      background: linear-gradient(135deg, #f56300 0%, #ff6b35 100%);
+    }
+
+    @keyframes recording {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(245, 99, 0, 0.7);
+      }
+
+      50% {
+        box-shadow: 0 0 0 15px rgba(245, 99, 0, 0);
+      }
+    }
+
+    .floating-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .floating-btn:active {
+      transform: scale(0.95);
+    }
+
+    @media (max-width: 768px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 20px 15px 15px;
+      }
+
+      .avatar-card {
+        height: 300px;
+      }
+
+      .avatar-placeholder {
+        width: 140px;
+        height: 140px;
+        font-size: 70px;
+      }
+
+      .main-panel {
+        padding: 20px 16px;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .feature-btn {
+        padding: 18px 14px;
+      }
+
+      .feature-icon {
+        font-size: 24px;
+      }
+
+      .feature-title {
+        font-size: 12px;
+      }
+
+      .floating-btn {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="avatar-card">
+      <div id="avatar-container">
+        <img id="avatar-image" src="avatar.png.jpg" alt="AI Assistant"
+          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22rgba(255,255,255,0.3)%22/%3E%3Ctext x=%2250%22 y=%2255%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22rgba(255,255,255,0.6)%22%3E%3C/text%3E%3C/svg%3E'">
+        <div class="avatar-overlay">
+          <div class="avatar-name">🤖 AI English Coach</div>
+          <div class="avatar-status">
+            <span class="status-indicator"></span>
+            <span id="avatar-status-text">Online</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-panel">
+      <div class="panel-header">
+        <h1>🤖 AI English Coach</h1>
+        <p>Your Personal English Assistant · Always Online</p>
+      </div>
+
+      <div class="features-grid">
+        <button class="feature-btn" onclick="selectMode('interpret')">
+          <span class="feature-icon">🎤</span>
+          <span class="feature-title">实时口译</span>
+        </button>
+
+        <button class="feature-btn" onclick="selectMode('photo')">
+          <span class="feature-icon">📷</span>
+          <span class="feature-title">拍照朗读</span>
+        </button>
+
+        <button class="feature-btn" onclick="selectMode('ielts')">
+          <span class="feature-icon">📚</span>
+          <span class="feature-title">雅思考试</span>
+        </button>
+
+        <button class="feature-btn" onclick="selectMode('kids')">
+          <span class="feature-icon">👶</span>
+          <span class="feature-title">儿童模式</span>
+        </button>
+
+        <button class="feature-btn" onclick="selectMode('teaching')">
+          <span class="feature-icon">👨‍</span>
+          <span class="feature-title">教学模式</span>
+        </button>
+
+        <button class="feature-btn" onclick="selectMode('scenario')">
+          <span class="feature-icon">💬</span>
+          <span class="feature-title">场景对话</span>
+        </button>
+      </div>
+
+      <div class="chat-area">
+        <div class="chat-status">
+          <div class="status-left">
+            <span class="status-dot" id="status-dot"></span>
+            <span id="status-text">等待连接...</span>
+          </div>
+          <div class="mic-btn-wrapper">
+            <button class="mic-btn" id="mic-btn" onclick="toggleRecording()">
+              🎙️
+            </button>
+          </div>
+        </div>
+
+        <!-- 添加文字输入框 -->
+        <div class="text-input-area" style="display: flex; gap: 10px; margin-top: 10px;">
+          <input type="text" id="text-input" placeholder="输入文字开始对话..."
+            style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;"
+            onkeypress="if(event.keyCode===13) sendText()">
+          <button onclick="sendText()"
+            style="padding: 12px 24px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px;">
+            发送
+          </button>
+        </div>
+
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-placeholder" id="chat-placeholder">对话内容会显示在这里</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let isRecording = false;
+    let currentMode = 'chat';
+    let recognition = null;
+    let synthesis = window.speechSynthesis;
+    let isConnected = false;
+    let isSpeaking = false;
+
+    const statusText = document.getElementById('status-text');
+    const statusDot = document.getElementById('status-dot');
+    const micBtn = document.getElementById('mic-btn');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatPlaceholder = document.getElementById('chat-placeholder');
+    const avatarImage = document.getElementById('avatar-image');
+    const avatarStatusText = document.getElementById('avatar-status-text');
+
+    // 初始化系统
+    function initSystem() {
+      try {
+        updateStatus('正在初始化...', false);
+        updateAvatarStatus('初始化中...');
+
+        // 初始化语音识别
+        initSpeechRecognition();
+
+        // 模拟初始化延迟
+        setTimeout(() => {
+          updateStatus('Click microphone to start', true);
+          updateAvatarStatus('Online');
+          addMessage('system', 'AI English Coach is ready!');
+          addMessage('system', 'I am your personal AI assistant, here to help you practice English and answer questions.');
+          isConnected = true;
+        }, 1000);
+
+      } catch (error) {
+        console.error('初始化失败:', error);
+        updateStatus('初始化失败：' + error.message, false);
+        addMessage('system', '初始化失败：' + error.message);
+      }
+    }
+
+    // 初始化语音识别
+    function initSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+
+        recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          addMessage('user', transcript);
+          stopRecording();
+          getAIResponse(transcript);
+        };
+
+        recognition.onerror = (event) => {
+          console.error('语音识别错误:', event.error);
+          addMessage('system', '语音识别失败，请重试');
+          stopRecording();
+        };
+
+        recognition.onend = () => {
+          stopRecording();
+        };
+
+        addMessage('system', '语音识别已就绪');
+      } else {
+        addMessage('system', '您的浏览器不支持语音识别，请使用 Chrome 或 Edge 浏览器');
+      }
+    }
+
+    function selectMode(mode) {
+      currentMode = mode;
+      addMessage('system', `已切换到${getModeName(mode)}模式`);
+    }
+
+    function getModeName(mode) {
+      const names = {
+        'interpret': '实时口译',
+        'photo': '拍照朗读',
+        'ielts': '雅思考试',
+        'kids': '儿童模式',
+        'teaching': '教学模式',
+        'scenario': '场景对话',
+        'chat': '自由对话'
+      };
+      return names[mode] || '自由对话';
+    }
+
+    function addMessage(type, text) {
+      if (chatPlaceholder) {
+        chatPlaceholder.style.display = 'none';
+      }
+
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `chat-message ${type}`;
+      messageDiv.textContent = text;
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function updateStatus(status, isConnected = false) {
+      statusText.textContent = status;
+      if (isConnected) {
+        statusDot.style.background = '#48bb78';
+      } else {
+        statusDot.style.background = '#f56300';
+      }
+    }
+
+    function startRecording() {
+      if (!recognition) {
+        addMessage('system', '浏览器不支持语音识别');
+        return;
+      }
+
+      if (isRecording) {
+        recognition.stop();
+        return;
+      }
+
+      try {
+        recognition.start();
+        micBtn.classList.add('recording');
+        isRecording = true;
+        updateStatus('正在收听...', true);
+        updateAvatarStatus('正在听...');
+        addMessage('system', '请说话...');
+      } catch (e) {
+        console.error('启动录音失败:', e);
+        addMessage('system', '启动录音失败，请重试');
+      }
+    }
+
+    function stopRecording() {
+      micBtn.classList.remove('recording');
+      isRecording = false;
+      updateStatus('点击话筒开始对话', true);
+      updateAvatarStatus('在线');
+    }
+
+    function toggleRecording() {
+      if (!isConnected) {
+        addMessage('system', '请先等待系统初始化完成');
+        return;
+      }
+
+      if (isSpeaking) {
+        synthesis.cancel();
+        isSpeaking = false;
+        avatarImage.classList.remove('speaking');
+        updateAvatarStatus('Online');
+      }
+
+      if (isRecording) {
+        recognition.stop();
+        stopRecording();
+      } else {
+        startRecording();
+      }
+    }
+
+    // 发送文字消息
+    function sendText() {
+      const input = document.getElementById('text-input');
+      const text = input.value.trim();
+
+      if (!text) {
+        return;
+      }
+
+      if (!isConnected) {
+        addMessage('system', '请先等待系统初始化完成');
+        return;
+      }
+
+      // 显示用户消息
+      addMessage('user', text);
+      input.value = '';
+
+      // 获取 AI 回复
+      getAIResponse(text);
+    }
+
+    // 获取 AI 回复（调用百炼 API）
+    async function getAIResponse(userText) {
+      updateStatus('Thinking...', true);
+      updateAvatarStatus('Thinking...');
+
+      try {
+        // 调用后端百炼 API - 使用相对路径
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            text: userText,
+            mode: currentMode,
+            language: 'en'
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('API 调用失败');
+        }
+
+        const result = await response.json();
+
+        if (result.success && result.data) {
+          const reply = result.data;
+          addMessage('avatar', reply);
+
+          // 如果有音频，播放音频；否则使用浏览器语音合成
+          if (result.audio) {
+            console.log('播放后端返回的音频...');
+            // 支持两种格式：Base64 数据 或 HTTP URL
+            if (result.audio.startsWith('http://') || result.audio.startsWith('https://')) {
+              // 直接播放 URL
+              playAudioUrl(result.audio);
+            } else {
+              // Base64 数据
+              playAudioBase64(result.audio);
+            }
+          } else {
+            console.log('使用浏览器语音合成...');
+            speakText(reply);
+          }
+        } else {
+          throw new Error(result.error || '回复为空');
+        }
+
+        updateStatus('点击话筒开始对话', true);
+        updateAvatarStatus('在线');
+
+      } catch (error) {
+        console.error('获取回复失败:', error);
+        // 降级使用模拟回复
+        useMockResponse(userText);
+      }
+    }
+
+    // 模拟回复（降级方案）
+    function useMockResponse(userText) {
+      setTimeout(() => {
+        const mockResponses = [
+          'Hello! I am your English speaking coach, nice to serve you.',
+          'That is a great question, let me help you with that.',
+          'You can ask me more questions, keep practicing!',
+          'I understand your needs and will do my best to help.',
+          'Very good! Keep up the great work!'
+        ];
+        const randomResponse = mockResponses[Math.floor(Math.random() * mockResponses.length)];
+        addMessage('avatar', randomResponse);
+        speakText(randomResponse);
+        updateStatus('Click microphone to start', true);
+        updateAvatarStatus('Online');
+      }, 1000);
+    }
+
+    // 播放 Base64 音频
+    function playAudioBase64(audioBase64) {
+      const audio = new Audio('data:audio/mp3;base64,' + audioBase64);
+
+      audio.onplay = () => {
+        isSpeaking = true;
+        avatarImage.classList.add('speaking');
+        updateAvatarStatus('Speaking...');
+        console.log('开始播放音频');
+      };
+
+      audio.onended = () => {
+        isSpeaking = false;
+        avatarImage.classList.remove('speaking');
+        updateAvatarStatus('Online');
+        console.log('音频播放完成');
+      };
+
+      audio.onerror = (e) => {
+        isSpeaking = false;
+        avatarImage.classList.remove('speaking');
+        updateAvatarStatus('Online');
+        console.error('音频播放失败:', e);
+        // 降级使用浏览器语音合成
+        speakText(reply);
+      };
+
+      audio.play();
+    }
+
+    // 播放 URL 音频
+    function playAudioUrl(audioUrl) {
+      const audio = new Audio(audioUrl);
+
+      audio.onplay = () => {
+        isSpeaking = true;
+        avatarImage.classList.add('speaking');
+        updateAvatarStatus('Speaking...');
+        console.log('开始播放音频 URL:', audioUrl);
+      };
+
+      audio.onended = () => {
+        isSpeaking = false;
+        avatarImage.classList.remove('speaking');
+        updateAvatarStatus('Online');
+        console.log('音频 URL 播放完成');
+      };
+
+      audio.onerror = (e) => {
+        isSpeaking = false;
+        avatarImage.classList.remove('speaking');
+        updateAvatarStatus('Online');
+        console.error('音频 URL 播放失败:', e);
+        // 降级使用浏览器语音合成
+        speakText(reply);
+      };
+
+      audio.play();
+    }
+
+    // 语音合成（朗读 AI 回复）
+    function speakText(text) {
+      if (synthesis.speaking) {
+        synthesis.cancel();
+      }
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.9;  // 稍慢一点，更适合语言学习
+      utterance.pitch = 1.0;
+      utterance.volume = 1.0;
+
+      // 尝试使用英文女声
+      const voices = synthesis.getVoices();
+      console.log('可用语音列表:', voices.map(v => ({ name: v.name, lang: v.lang })));
+
+      // 优先选择高质量的英文女声
+      const preferredVoices = [
+        'Google US English',
+        'Google US English Female',
+        'Microsoft Zira Desktop',
+        'Microsoft Aria Online',
+        'Samantha',
+        'Karen',
+        'Serena',
+        'Moira'
+      ];
+
+      let selectedVoice = null;
+
+      // 尝试找到首选音色
+      for (let voiceName of preferredVoices) {
+        const voice = voices.find(v => v.name.includes(voiceName));
+        if (voice) {
+          selectedVoice = voice;
+          console.log('✓ 找到首选音色:', voice.name);
+          break;
+        }
+      }
+
+      // 如果没有首选，找任何英文女声
+      if (!selectedVoice) {
+        // 先找美声
+        const enUSVoice = voices.find(voice =>
+          voice.lang.includes('en-US') && voice.name.includes('Female')
+        );
+        if (enUSVoice) {
+          selectedVoice = enUSVoice;
+          console.log('✓ 使用英文美声:', enUSVoice.name);
+        } else {
+          // 再找任何英文声音
+          const enVoice = voices.find(voice =>
+            voice.lang.includes('en')
+          );
+          if (enVoice) {
+            selectedVoice = enVoice;
+            console.log('✓ 使用英文声音:', enVoice.name);
+          }
+        }
+      }
+
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+      }
+
+      utterance.onstart = () => {
+        isSpeaking = true;
+        avatarImage.classList.add('speaking');
+        updateAvatarStatus('Speaking...');
+      };
+
+      utterance.onend = () => {
+        isSpeaking = false;
+        avatarImage.classList.remove('speaking');
+        updateAvatarStatus('Online');
+        console.log('Speech completed');
+      };
+
+      utterance.onerror = (event) => {
+        isSpeaking = false;
+        avatarImage.classList.remove('speaking');
+        updateAvatarStatus('Online');
+        console.error('Speech error:', event);
+      };
+
+      synthesis.speak(utterance);
+    }
+
+    // 更新状态
+    function updateAvatarStatus(status) {
+      if (avatarStatusText) {
+        avatarStatusText.textContent = status;
+      }
+    }
+
+    // 页面加载时初始化
+    window.addEventListener('load', () => {
+      initSystem();
+      // 加载语音列表
+      if (synthesis) {
+        synthesis.getVoices();
+      }
+    });
+  </script>
+</body>
+
+</html>

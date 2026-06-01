@@ -1,3 +1,7 @@
+# 欢迎使用你的秒哒应用代码包
+秒哒应用链接
+    URL:https://www.miaoda.cn/projects/app-9s74rqz8t1c1
+
 ## 介绍
 
 **智汇南洋 - 面向东盟AI商务英语实训平台**

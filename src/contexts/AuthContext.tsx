@@ -14,8 +14,29 @@ export async function getProfile(userId: string): Promise<UserProfile | null> {
     console.error('获取用户信息失败:', error);
     return null;
   }
+
+  if (!data) {
+    const { data: rpcResult, error: rpcError } = await supabase
+      .rpc('ensure_user_profile', { in_user_id: userId });
+    if (rpcError) {
+      console.error('自动创建 profile 失败:', rpcError);
+      return null;
+    }
+    const result = rpcResult as { success: boolean; role?: string } | null;
+    if (result?.success) {
+      const retry = await supabase
+        .from('user_profiles')
+        .select('*')
+        .eq('id', userId)
+        .maybeSingle();
+      return (retry.data as UserProfile) || null;
+    }
+    return null;
+  }
+
   return data;
 }
+
 interface AuthContextType {
   user: User | null;
   profile: UserProfile | null;
@@ -24,6 +45,7 @@ interface AuthContextType {
   signUpWithUsername: (username: string, password: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
+  becomeAdmin: () => Promise<{ success: boolean; message: string }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -100,8 +122,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setProfile(null);
   };
 
+  const becomeAdmin = async () => {
+    if (!user) return { success: false, message: '请先登录' };
+    try {
+      const { data, error } = await supabase
+        .rpc('become_admin_if_single_user', { in_user_id: user.id });
+      if (error) throw error;
+      const result = data as { success: boolean; message: string; role?: string };
+      if (result.success) {
+        await refreshProfile();
+      }
+      return { success: result.success, message: result.message };
+    } catch (err) {
+      return { success: false, message: (err as Error).message };
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, profile, loading, signInWithUsername, signUpWithUsername, signOut, refreshProfile }}>
+    <AuthContext.Provider value={{ user, profile, loading, signInWithUsername, signUpWithUsername, signOut, refreshProfile, becomeAdmin }}>
       {children}
     </AuthContext.Provider>
   );

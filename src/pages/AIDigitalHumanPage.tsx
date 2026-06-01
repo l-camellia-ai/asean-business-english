@@ -209,10 +209,10 @@ export default function AIDigitalHumanPage() {
               variant="ghost"
               size="sm"
               className="mb-4 justify-start"
-              onClick={() => navigate('/scenario-training')}
+              onClick={() => navigate('/')}
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
-              返回情景实战
+              返回首页
             </Button>
 
             {/* 数字人形象 */}
