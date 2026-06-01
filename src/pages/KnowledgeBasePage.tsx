@@ -41,7 +41,7 @@ export default function KnowledgeBasePage() {
       name: '泰国', 
       flag: '🇹🇭', 
       courses: 12,
-      image: 'https://miaoda-site-img.cdn.bcebos.com/images/MiaoTu_8e6508a8-7fdb-4479-b591-11ff8998e070.jpg',
+      image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=400&fit=crop',
       description: '微笑之国，佛教文化深厚'
     },
     { 
@@ -49,7 +49,7 @@ export default function KnowledgeBasePage() {
       name: '越南', 
       flag: '🇻🇳', 
       courses: 10,
-      image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_e2cf2683-342f-474c-b974-06e358b4774e.jpg',
+      image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&fit=crop',
       description: '快速发展的新兴市场'
     },
     { 
@@ -57,7 +57,7 @@ export default function KnowledgeBasePage() {
       name: '印尼', 
       flag: '🇮🇩', 
       courses: 8,
-      image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_dc4c482b-42f1-4528-b2fa-979b8772d50d.jpg',
+      image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&fit=crop',
       description: '东盟最大经济体'
     },
     { 
@@ -65,7 +65,7 @@ export default function KnowledgeBasePage() {
       name: '新加坡', 
       flag: '🇸🇬', 
       courses: 15,
-      image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_b5676c56-6dcb-4e65-b453-fe7bb4fda65c.jpg',
+      image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&fit=crop',
       description: '亚洲金融与科技中心'
     }
   ];

@@ -12,7 +12,7 @@ const COUNTRIES = [
     nameEn: 'Vietnam',
     flag: '🇻🇳',
     accent: '越南口音',
-    avatar: 'https://miaoda-conversation-file.cdn.bcebos.com/user-9s74qvdlnx1c/conv-9s74rqz8t1c0/20260422/file-b4nvrfp6h2bk.jpg'
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face'
   },
   {
     code: 'SG',

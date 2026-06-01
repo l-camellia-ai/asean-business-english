@@ -88,11 +88,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signInWithUsername = async (username: string, password: string) => {
     try {
-      const email = `${username}@miaoda.com`;
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      // 支持邮箱直接登录，或用户名自动补全域名
+      const email = username.includes('@') ? username : `${username}@aseanenglish.com`;
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
 
       if (error) throw error;
       return { error: null };
@@ -103,11 +101,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signUpWithUsername = async (username: string, password: string) => {
     try {
-      const email = `${username}@miaoda.com`;
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
+      // 支持邮箱直接注册，或用户名自动补全域名
+      const email = username.includes('@') ? username : `${username}@aseanenglish.com`;
+      const { error } = await supabase.auth.signUp({ email, password });
 
       if (error) throw error;
       return { error: null };

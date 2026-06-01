@@ -97,7 +97,7 @@ export default function StandardTraining({
   // 课程内容
   const lessonContent: Record<string, LessonContent> = {
     '1': {
-      image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_df9a9237-60ea-42ac-8a69-76c7a090843f.jpg',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop',
       content: `
 # 商务问候与介绍
 
@@ -126,7 +126,7 @@ export default function StandardTraining({
       ]
     },
     '2': {
-      image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_b0e2a5c8-4c5d-4a1c-8e3d-5f9a8b7c6d5e.jpg',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop',
       content: `
 # 商务邮件基础
 
@@ -154,7 +154,7 @@ export default function StandardTraining({
       ]
     },
     '3': {
-      image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_c1f3b4d5-5e6f-4g2h-9i3j-6k7l8m9n0o1p.jpg',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop',
       content: `
 # 电话沟通技巧
 

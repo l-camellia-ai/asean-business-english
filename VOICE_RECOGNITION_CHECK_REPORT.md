@@ -292,7 +292,7 @@ interface PhoneCallRequest {
 
 #### ✅ 语音识别API调用检查
 ```typescript
-const speechRecognitionUrl = 'https://app-9s74rqz8t1c1-api-Aa2PZnjEw5NL-gateway.appmiaoda.com/server_api';
+const speechRecognitionUrl = 'https://your-api-server.com/api';
 
 const recognitionPayload = {
   format: 'wav',           // ✅ 正确的格式

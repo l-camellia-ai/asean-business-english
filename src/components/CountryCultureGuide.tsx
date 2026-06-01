@@ -39,7 +39,7 @@ export default function CountryCultureGuide({
         {
           title: '商务礼仪',
           icon: <Briefcase className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_606921ff-9c58-4583-b025-0d384268ca5c.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**问候方式：** 使用"wai"手势（双手合十，微微鞠躬）表示尊重，地位越高的人，双手合十的位置越高',
             '**名片交换：** 双手递交和接收名片，仔细阅读后再收起',
@@ -65,7 +65,7 @@ export default function CountryCultureGuide({
         {
           title: '沟通风格',
           icon: <Users className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_7534249f-95cc-4046-ae86-52f314dc1513.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**间接沟通：** 泰国人倾向于间接表达，避免直接说"不"',
             '**非语言信号：** 注意肢体语言和面部表情，它们传达重要信息',
@@ -91,7 +91,7 @@ export default function CountryCultureGuide({
         {
           title: '商务宴请',
           icon: <Utensils className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_8e6277bd-4a9f-4fb9-b000-4719df6fdff7.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**用餐礼仪：** 使用勺子和叉子，勺子在右手，叉子在左手',
             '**座位安排：** 等待主人安排座位，最尊贵的客人坐在主人右侧',
@@ -117,7 +117,7 @@ export default function CountryCultureGuide({
         {
           title: '送礼文化',
           icon: <Gift className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_43b0ecee-cbd0-45f4-bead-85db4ecd4bd7.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**送礼时机：** 初次见面、节日庆典、商务合作达成时',
             '**礼物选择：** 选择有品质但不过于昂贵的礼物，避免过于个人化的物品',
@@ -148,7 +148,7 @@ export default function CountryCultureGuide({
         {
           title: '商务礼仪',
           icon: <Briefcase className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_46582566-a339-4e50-b400-006c7adee9c3.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**问候方式：** 握手是标准的商务问候方式，同时可以轻微点头示意',
             '**名片交换：** 双手递交和接收名片，仔细阅读后再收起，表示尊重',
@@ -174,7 +174,7 @@ export default function CountryCultureGuide({
         {
           title: '沟通风格',
           icon: <Users className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_9d46284f-f092-46cf-88eb-7bd6c4260cda.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**间接沟通：** 越南人倾向于间接表达，避免直接冲突',
             '**保全面子：** 非常重视"面子"，避免让对方感到尴尬',
@@ -200,7 +200,7 @@ export default function CountryCultureGuide({
         {
           title: '商务宴请',
           icon: <Utensils className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_35185832-1372-4f2b-81cc-ed176063672f.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**用餐礼仪：** 使用筷子和勺子，等长辈开始用餐后再动筷',
             '**座位安排：** 最尊贵的客人坐在主人对面或右侧',
@@ -226,7 +226,7 @@ export default function CountryCultureGuide({
         {
           title: '送礼文化',
           icon: <Gift className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_a38bd070-d33f-418a-9977-21fd8d081d07.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**送礼时机：** 春节（Tết）、中秋节、商务合作达成时',
             '**礼物选择：** 选择有品质的礼物，如茶叶、酒类、特产',
@@ -257,7 +257,7 @@ export default function CountryCultureGuide({
         {
           title: '商务礼仪',
           icon: <Briefcase className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_73ca76e1-aa38-42cb-a5a7-c6fc57230abf.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**问候方式：** 握手是标准方式，但要注意性别差异，等待女性先伸手',
             '**名片交换：** 用右手或双手递交和接收名片，左手被视为不洁',
@@ -283,7 +283,7 @@ export default function CountryCultureGuide({
         {
           title: '沟通风格',
           icon: <Users className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_13c54ce3-03bc-4c6a-b21e-971bf83daf9c.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**间接沟通：** 印尼人倾向于间接表达，避免直接冲突',
             '**和谐至上：** 维护和谐关系比直接表达意见更重要',
@@ -309,7 +309,7 @@ export default function CountryCultureGuide({
         {
           title: '商务宴请',
           icon: <Utensils className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_59e579cf-b88c-474b-93e7-19b457f1d286.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**用餐礼仪：** 使用右手进食，左手不应触碰食物',
             '**清真食品：** 确保提供清真（Halal）食品，避免猪肉和酒精',
@@ -335,7 +335,7 @@ export default function CountryCultureGuide({
         {
           title: '送礼文化',
           icon: <Gift className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_05879dfa-26ca-428d-b45d-0d085a4f03be.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**送礼时机：** 开斋节（Eid al-Fitr）、商务合作达成时',
             '**礼物选择：** 选择符合伊斯兰教规的礼物，避免酒精和猪肉制品',
@@ -366,7 +366,7 @@ export default function CountryCultureGuide({
         {
           title: '商务礼仪',
           icon: <Briefcase className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_ac54cdb1-5098-4c4b-a596-300c32ce7576.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**问候方式：** 握手是标准方式，眼神交流表示诚意和尊重',
             '**名片交换：** 双手递交和接收名片，仔细阅读后再收起',
@@ -392,7 +392,7 @@ export default function CountryCultureGuide({
         {
           title: '沟通风格',
           icon: <Users className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_fae466ba-a452-4a23-95af-56f8da82315f.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**直接沟通：** 新加坡人倾向于直接表达，但仍保持礼貌',
             '**效率导向：** 沟通简洁明了，注重结果',
@@ -418,7 +418,7 @@ export default function CountryCultureGuide({
         {
           title: '商务宴请',
           icon: <Utensils className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_8f6d5535-fef4-4ed7-a04f-6d04233ff211.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**用餐礼仪：** 根据餐厅类型使用相应餐具',
             '**多元美食：** 新加坡有丰富的多元文化美食',
@@ -444,7 +444,7 @@ export default function CountryCultureGuide({
         {
           title: '送礼文化',
           icon: <Gift className="h-5 w-5" />,
-          image: 'https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_d2bed1f9-51c7-4cf8-8e0b-f36a5a1b01fc.jpg',
+          image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
           content: [
             '**送礼时机：** 春节、开斋节、屠妖节、圣诞节等多元文化节日',
             '**礼物选择：** 选择有品质但不过于昂贵的礼物',
