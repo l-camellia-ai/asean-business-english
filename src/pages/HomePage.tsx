@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import NavigationBar from '@/components/NavigationBar';
 import LearningMapVisual from '@/components/LearningMapVisual';
@@ -34,25 +35,25 @@ export default function HomePage() {
   const [completedChallengeIds, setCompletedChallengeIds] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
 
-  // 模拟用户ID（实际应从认证系统获取）
-  const mockUserId = 'demo-user-id';
+  const { user } = useAuth();
+  const userId = user?.id;
 
   useEffect(() => {
-    loadData();
-  }, []);
+    if (userId) loadData();
+  }, [userId]);
 
   const loadData = async () => {
     try {
       setLoading(true);
       
       // 加载用户资料（如果不存在则使用默认值）
-      const profile = await getUserProfile(mockUserId);
+      const profile = await getUserProfile(userId);
       if (profile) {
         setUserProfile(profile);
       } else {
         // 使用默认值
         setUserProfile({
-          id: mockUserId,
+          id: userId,
           user_type: 'individual',
           experience_points: 1250,
           level: 5,
@@ -62,7 +63,7 @@ export default function HomePage() {
       }
 
       // 加载学习进度
-      const progress = await getUserLearningProgress(mockUserId);
+      const progress = await getUserLearningProgress(userId);
       setProgressData(progress);
 
       // 加载今日挑战
@@ -70,7 +71,7 @@ export default function HomePage() {
       setTodayChallenges(challenges);
 
       // 加载已完成的挑战
-      const completions = await getUserChallengeCompletions(mockUserId);
+      const completions = await getUserChallengeCompletions(userId);
       const completedIds = new Set(completions.map(c => c.challenge_id));
       setCompletedChallengeIds(completedIds);
     } catch (error) {

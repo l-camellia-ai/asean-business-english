@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 import { useSearchParams } from 'react-router-dom';
 import NavigationBar from '@/components/NavigationBar';
 import LearningMapVisual from '@/components/LearningMapVisual';
@@ -14,26 +15,27 @@ export default function LearningMapPage() {
   const [abilities, setAbilities] = useState<AbilityDimensions | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const mockUserId = 'demo-user-id';
+  const { user } = useAuth();
+  const userId = user?.id;
   const selectedCountry = searchParams.get('country');
 
   useEffect(() => {
-    loadData();
-  }, []);
+    if (userId) loadData();
+  }, [userId]);
 
   const loadData = async () => {
     try {
-      const progress = await getUserLearningProgress(mockUserId);
+      const progress = await getUserLearningProgress(userId);
       setProgressData(progress);
 
-      const userAbilities = await getUserAbilities(mockUserId);
+      const userAbilities = await getUserAbilities(userId);
       if (userAbilities) {
         setAbilities(userAbilities);
       } else {
         // 使用默认值
         setAbilities({
           id: 'demo-ability-id',
-          user_id: mockUserId,
+          user_id: userId,
           language_accuracy: 75,
           cultural_adaptation: 68,
           business_strategy: 82,

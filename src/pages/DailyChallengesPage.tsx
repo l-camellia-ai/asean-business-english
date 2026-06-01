@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 import NavigationBar from '@/components/NavigationBar';
 import DailyChallengeCard from '@/components/DailyChallengeCard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,18 +14,19 @@ export default function DailyChallengesPage() {
   const [streak, setStreak] = useState(7); // 连续签到天数
   const [loading, setLoading] = useState(true);
 
-  const mockUserId = 'demo-user-id';
+  const { user } = useAuth();
+  const userId = user?.id;
 
   useEffect(() => {
-    loadData();
-  }, []);
+    if (userId) loadData();
+  }, [userId]);
 
   const loadData = async () => {
     try {
       const todayChallenges = await getTodayChallenges();
       setChallenges(todayChallenges);
 
-      const completions = await getUserChallengeCompletions(mockUserId);
+      const completions = await getUserChallengeCompletions(userId);
       const ids = new Set(completions.map(c => c.challenge_id));
       setCompletedIds(ids);
     } catch (error) {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 import NavigationBar from '@/components/NavigationBar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,18 +13,19 @@ export default function PremiumPackagePage() {
   const [currentSubscription, setCurrentSubscription] = useState<UserSubscription | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const mockUserId = 'demo-user-id';
+  const { user } = useAuth();
+  const userId = user?.id;
 
   useEffect(() => {
-    loadData();
-  }, []);
+    if (userId) loadData();
+  }, [userId]);
 
   const loadData = async () => {
     try {
       const allPackages = await getAllPackages();
       setPackages(allPackages);
 
-      const subscription = await getUserSubscription(mockUserId);
+      const subscription = await getUserSubscription(userId);
       setCurrentSubscription(subscription);
     } catch (error) {
       console.error('加载套餐失败:', error);
