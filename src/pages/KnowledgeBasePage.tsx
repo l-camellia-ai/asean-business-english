@@ -32,7 +32,7 @@ interface MarketInsight {
 export default function KnowledgeBasePage() {
   const [selectedInsight, setSelectedInsight] = useState<MarketInsight | null>(null);
   const [isLoadingDetail, setIsLoadingDetail] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState<any | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<{ code: string; name: string; flag: string } | null>(null);
   const [cultureDialogOpen, setCultureDialogOpen] = useState(false);
 
   const countries = [
@@ -71,7 +71,7 @@ export default function KnowledgeBasePage() {
   ];
 
   // 处理国家点击
-  const handleCountryClick = (country: any) => {
+  const handleCountryClick = (country: { code: string; name: string; flag: string }) => {
     setSelectedCountry(country);
     setCultureDialogOpen(true);
   };

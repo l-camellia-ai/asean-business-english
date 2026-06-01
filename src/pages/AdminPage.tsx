@@ -127,7 +127,7 @@ export default function AdminPage() {
       }
 
       setActivities(
-        ((recentActivities as any[]) || []).map((a: any) => ({
+        ((recentActivities as ActivityRecord[]) || []).map((a: ActivityRecord) => ({
           ...a,
           username: userMap.get(a.user_id) || '未知用户',
         }))
