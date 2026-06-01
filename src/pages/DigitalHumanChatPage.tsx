@@ -319,7 +319,7 @@ export default function DigitalHumanChatPage() {
   };
 
   // 按Enter发送
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -513,7 +513,7 @@ export default function DigitalHumanChatPage() {
                   ref={inputRef}
                   value={inputMessage}
                   onChange={e => setInputMessage(e.target.value)}
-                  onKeyPress={handleKeyPress}
+                  onKeyDown={handleKeyDown}
                   placeholder="输入消息与AI英语私教对话..."
                   className="flex-1"
                   disabled={isLoading}

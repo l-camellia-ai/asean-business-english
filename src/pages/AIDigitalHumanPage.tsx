@@ -144,7 +144,7 @@ export default function AIDigitalHumanPage() {
     await simulateAIResponse();
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -354,7 +354,7 @@ export default function AIDigitalHumanPage() {
                   ref={inputRef}
                   value={inputMessage}
                   onChange={e => setInputMessage(e.target.value)}
-                  onKeyPress={handleKeyPress}
+                  onKeyDown={handleKeyDown}
                   placeholder="输入消息与AI数字人对话..."
                   className="flex-1"
                   disabled={isLoading}
