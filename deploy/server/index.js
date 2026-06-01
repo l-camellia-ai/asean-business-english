@@ -26,10 +26,17 @@ app.use(express.json());
 // ============================================================================
 // 配置管理 - 支持环境变量读取，避免硬编码
 // ============================================================================
+// 启动前检查必需的环境变量
+if (!process.env.BAILIAN_APP_ID || !process.env.BAILIAN_API_KEY) {
+  console.error('❌ 缺少必需的环境变量：BAILIAN_APP_ID 和 BAILIAN_API_KEY');
+  console.error('请在 deploy/server/.env 文件中配置');
+  process.exit(1);
+}
+
 const config = {
-  // 百炼应用配置
-  appId: process.env.BAILIAN_APP_ID || 'f30eb64732064d94807781ae4e8d938b',
-  apiKey: process.env.BAILIAN_API_KEY || 'sk-a4ce50f4b5594c0daddeb9022199102e',
+  // 百炼应用配置（仅从环境变量读取，不硬编码）
+  appId: process.env.BAILIAN_APP_ID,
+  apiKey: process.env.BAILIAN_API_KEY,
 
   // 语音合成配置 - 使用复刻音色 ID
   ttsModel: 'cosyvoice-v3.5-plus',
