@@ -1,0 +1,6 @@
+[phases.build]
+workingDir = "deploy/server"
+cmds = ["cd deploy/server && npm install"]
+
+[phases.start]
+cmd = "cd deploy/server && node index.js"
