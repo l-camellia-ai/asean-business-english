@@ -38,3 +38,6 @@ deploy/server/ssl/
 
 # Release builds
 release/
+
+# 截图
+截图/
