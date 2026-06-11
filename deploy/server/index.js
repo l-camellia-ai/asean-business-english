@@ -20,7 +20,10 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-app.use(cors());
+// CORS: 生产环境只允许 Vercel 前端域名，开发环境允许所有
+app.use(cors({
+  origin: process.env.ALLOWED_ORIGIN || '*'
+}));
 app.use(express.json());
 
 // ============================================================================
@@ -43,7 +46,8 @@ const config = {
   voiceId: 'cosyvoice-v3.5-plus-bailian-f53be35f4cd54af69be4bd055fdb52af', // 复刻音色"阮氏琼"
 
   // 服务器配置
-  httpPort: parseInt(process.env.HTTP_PORT) || 3000,
+  // Railway 等平台注入 PORT 环境变量，优先使用
+  port: parseInt(process.env.PORT) || parseInt(process.env.HTTP_PORT) || 3000,
   httpsPort: parseInt(process.env.HTTPS_PORT) || 3443
 };
 
@@ -374,33 +378,39 @@ async function synthesizeSpeech(text) {
 // 启动服务器
 // ============================================================================
 function startServer() {
+  const port = config.port;
+
   // HTTP 服务器
-  app.listen(config.httpPort, '0.0.0.0', () => {
-    console.log(`\nHTTP 服务器运行在 http://0.0.0.0:${config.httpPort}`);
+  app.listen(port, '0.0.0.0', () => {
+    console.log(`\nHTTP 服务器运行在 http://0.0.0.0:${port}`);
   });
 
-  // HTTPS 服务器（需要证书）
-  try {
-    const keyPath = path.join(__dirname, 'ssl', 'server.key');
-    const certPath = path.join(__dirname, 'ssl', 'server.crt');
+  // 本地开发时尝试启用 HTTPS（Railway 等平台自动处理 SSL，不需要本地 HTTPS）
+  if (!process.env.PORT) {
+    try {
+      const keyPath = path.join(__dirname, 'ssl', 'server.key');
+      const certPath = path.join(__dirname, 'ssl', 'server.crt');
 
-    if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
-      const options = {
-        key: fs.readFileSync(keyPath),
-        cert: fs.readFileSync(certPath)
-      };
+      if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
+        const options = {
+          key: fs.readFileSync(keyPath),
+          cert: fs.readFileSync(certPath)
+        };
 
-      const httpsServer = https.createServer(options, app);
-      httpsServer.listen(config.httpsPort, '0.0.0.0', () => {
-        console.log(`✅ HTTPS 服务器运行在 https://0.0.0.0:${config.httpsPort}`);
-        console.log('\n提示：请使用 HTTPS 地址访问以启用浏览器语音识别功能');
-      });
-    } else {
-      console.log('\n⚠️ 未找到 SSL 证书，仅启用 HTTP');
-      console.log('如需 HTTPS，请在 server/ssl 目录放置 server.key 和 server.crt');
+        const httpsServer = https.createServer(options, app);
+        httpsServer.listen(config.httpsPort, '0.0.0.0', () => {
+          console.log(`✅ HTTPS 服务器运行在 https://0.0.0.0:${config.httpsPort}`);
+          console.log('\n提示：请使用 HTTPS 地址访问以启用浏览器语音识别功能');
+        });
+      } else {
+        console.log('\n⚠️ 未找到 SSL 证书，仅启用 HTTP');
+        console.log('如需 HTTPS，请在 server/ssl 目录放置 server.key 和 server.crt');
+      }
+    } catch (error) {
+      console.error('\n❌ HTTPS 服务器启动失败:', error.message);
     }
-  } catch (error) {
-    console.error('\n❌ HTTPS 服务器启动失败:', error.message);
+  } else {
+    console.log('✅ 运行在云平台模式（SSL 由平台自动处理）');
   }
 }
 
