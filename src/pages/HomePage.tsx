@@ -39,7 +39,11 @@ export default function HomePage() {
   const userId = user?.id;
 
   useEffect(() => {
-    if (userId) loadData();
+    if (userId) {
+      loadData();
+    } else {
+      setLoading(false);
+    }
   }, [userId]);
 
   const loadData = async () => {
